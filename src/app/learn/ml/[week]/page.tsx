@@ -116,22 +116,36 @@ export default async function MLWeekPage({
         </h2>
         <div className="space-y-3">
           {section.resources.map((resource, i) => (
-            <div
+            <Link
               key={i}
-              className="p-5 rounded-xl bg-white border border-[var(--color-border)] shadow-sm"
+              href={`/learn/ml/${weekNum}/${resource.slug}`}
+              className="block p-5 rounded-xl bg-white border border-[var(--color-border)] shadow-sm hover:shadow-md hover:border-[var(--color-accent)] transition-all group"
             >
               <div className="flex items-start gap-3">
                 <ResourceBadge type={resource.type} />
                 <div className="flex-1">
-                  <h3 className="font-medium text-[var(--color-text)] mb-1">
+                  <h3 className="font-medium text-[var(--color-text)] mb-1 group-hover:text-[var(--color-accent)] transition-colors">
                     {resource.title}
                   </h3>
                   <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                     {resource.description}
                   </p>
                 </div>
+                <svg
+                  className="w-5 h-5 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors shrink-0 mt-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
