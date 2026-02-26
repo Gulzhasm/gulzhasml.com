@@ -28,22 +28,18 @@ export async function generateMetadata({
 }
 
 function ResourceBadge({ type }: { type: TopicResource["type"] }) {
-  const label =
-    type === "lab"
-      ? "LAB"
-      : type === "lecture"
-        ? "LEC"
-        : type === "notebook"
-          ? "NB"
-          : type === "tutorial"
-            ? "TUT"
-            : type === "project"
-              ? "PRJ"
-              : "POST";
+  const labels: Record<string, string> = {
+    theory: "THEORY",
+    practice: "PRACTICE",
+    notebook: "NOTEBOOK",
+    project: "PROJECT",
+    tutorial: "TUTORIAL",
+    post: "POST",
+  };
 
   const colors: Record<string, string> = {
-    lab: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    lecture: "bg-blue-50 text-blue-700 border-blue-200",
+    theory: "bg-blue-50 text-blue-700 border-blue-200",
+    practice: "bg-emerald-50 text-emerald-700 border-emerald-200",
     notebook: "bg-purple-50 text-purple-700 border-purple-200",
     project: "bg-amber-50 text-amber-700 border-amber-200",
     tutorial: "bg-cyan-50 text-cyan-700 border-cyan-200",
@@ -54,7 +50,7 @@ function ResourceBadge({ type }: { type: TopicResource["type"] }) {
     <span
       className={`text-[10px] font-bold px-2 py-0.5 rounded border ${colors[type] || "bg-gray-50 text-gray-600 border-gray-200"}`}
     >
-      {label}
+      {labels[type] || type.toUpperCase()}
     </span>
   );
 }
@@ -62,21 +58,7 @@ function ResourceBadge({ type }: { type: TopicResource["type"] }) {
 function ResourceCard({ resource }: { resource: TopicResource }) {
   return (
     <div className="p-4 rounded-xl bg-white border border-[var(--color-border)] shadow-sm flex items-start gap-4">
-      <div className="w-8 h-8 rounded-lg bg-[var(--color-accent-light)] flex items-center justify-center shrink-0 mt-0.5">
-        <span className="text-xs font-bold text-[var(--color-accent)]">
-          {resource.type === "lab"
-            ? "LAB"
-            : resource.type === "lecture"
-              ? "LEC"
-              : resource.type === "notebook"
-                ? "NB"
-                : resource.type === "tutorial"
-                  ? "TUT"
-                  : resource.type === "project"
-                    ? "PRJ"
-                    : "POST"}
-        </span>
-      </div>
+      <ResourceBadge type={resource.type} />
       <div>
         <h3 className="font-medium text-[var(--color-text)]">
           {resource.title}

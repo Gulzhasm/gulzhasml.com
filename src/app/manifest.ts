@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Gulzhas Mailybayeva — AI/ML Engineer",
+    name: "Gulzhas Mailybayeva - AI/ML Engineer",
     short_name: "gulzhas.ml",
     description:
       "AI/ML Engineer portfolio — machine learning, NLP, LLM orchestration, and intelligent test automation.",
