@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const learnTopics = [
   { label: "Machine Learning", href: "/learn/ml" },
   { label: "Artificial Intelligence", href: "/learn/ai" },
-  { label: "NLP", href: "/learn/nlp" },
-  { label: "SPRL", href: "/learn/sprl" },
+  { label: "Natural Language Processing", href: "/learn/nlp" },
+  { label: "Statistical Planning and Reinforcement Learning", href: "/learn/sprl" },
   { label: "Neural Networks & NLP", href: "/learn/nn-nlp" },
   { label: "Conversational Agents", href: "/learn/conversational" },
   { label: "Information Retrieval", href: "/learn/ir" },
