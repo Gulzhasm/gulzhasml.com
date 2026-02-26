@@ -62,6 +62,24 @@ function ResourceBadge({ type }: { type: TopicResource["type"] }) {
   );
 }
 
+function renderInlineCode(text: string) {
+  // Split on patterns like `code` or formula-like expressions
+  const parts = text.split(/(`[^`]+`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return (
+        <code
+          key={i}
+          className="px-1.5 py-0.5 rounded bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] text-[13px] font-mono"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
 export default async function ResourcePage({
   params,
 }: {
@@ -116,20 +134,44 @@ export default async function ResourcePage({
         <p className="text-lg text-[var(--color-text-muted)] leading-relaxed">
           {resource.description}
         </p>
+
+        {/* Notebook download */}
+        {resource.notebookUrl && (
+          <a
+            href={resource.notebookUrl}
+            download
+            className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-[var(--color-accent)] text-white text-sm font-medium hover:bg-[var(--color-accent-hover)] transition-colors"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Download Notebook (.ipynb)
+          </a>
+        )}
       </div>
 
       {/* Content */}
       <div className="mb-10">
-        <div className="p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm space-y-4">
+        <article className="p-8 rounded-xl bg-white border border-[var(--color-border)] shadow-sm space-y-5">
           {paragraphs.map((paragraph, i) => (
             <p
               key={i}
-              className="text-[var(--color-text-muted)] leading-relaxed"
+              className="text-[var(--color-text-secondary)] leading-[1.8] text-[15px]"
             >
-              {paragraph}
+              {renderInlineCode(paragraph)}
             </p>
           ))}
-        </div>
+        </article>
       </div>
 
       {/* Navigation */}
