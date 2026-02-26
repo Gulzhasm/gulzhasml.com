@@ -58,9 +58,8 @@ export default function AboutPage() {
             Medium
           </a>
           ), I publish learning notes, Jupyter notebooks, and practical deep-dives
-          on ML, NLP, and deep learning — so I can refresh fast before interviews and
-          help others build the same fundamentals. My goal is simple: ship production-ready
-          AI — then document the path.
+          on ML, NLP, and deep learning — so I can help others learn AI/ML fundamentals, build the same fundamentals. My goal is simple: ship production-ready
+          AI - then document the path.
         </p>
       </div>
 

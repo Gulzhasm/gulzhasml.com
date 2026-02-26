@@ -2,7 +2,7 @@ export function About() {
   return (
     <section id="about" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-2">About</h2>
+        <h2 className="text-3xl font-bold mb-2">About Gulzhas Mailybayeva</h2>
         <div className="w-16 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-secondary)] mb-10 rounded" />
 
         <div className="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
@@ -38,8 +38,7 @@ export function About() {
               Medium
             </a>
             ), I publish learning notes, Jupyter notebooks, and practical deep-dives
-            on ML, NLP, and deep learning — so I can refresh fast before interviews and
-            help others build the same fundamentals. My goal is simple: ship production-ready
+            on ML, NLP, and deep learning — so I can help others learn AI/ML fundamentals,build the same fundamentals. My goal is simple: ship production-ready
             AI — then document the path.
           </p>
         </div>
