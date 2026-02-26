@@ -1,9 +1,12 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { topics, getTopicBySlug, TopicResource } from "@/lib/topics";
 
 export function generateStaticParams() {
-  return topics.map((topic) => ({ topic: topic.slug }));
+  // Exclude "ml" — it has its own dedicated route at /learn/ml
+  return topics
+    .filter((t) => t.slug !== "ml")
+    .map((topic) => ({ topic: topic.slug }));
 }
 
 export async function generateMetadata({
@@ -77,10 +80,13 @@ export default async function TopicPage({
   params: Promise<{ topic: string }>;
 }) {
   const { topic: slug } = await params;
+
+  // ML has its own dedicated route at /learn/ml
+  if (slug === "ml") redirect("/learn/ml");
+
   const topic = getTopicBySlug(slug);
   if (!topic) notFound();
 
-  const hasSections = topic.sections && topic.sections.length > 0;
   const hasResources = topic.resources.length > 0;
 
   return (
@@ -147,59 +153,8 @@ export default async function TopicPage({
         </div>
       </div>
 
-      {/* Week-based Sections */}
-      {hasSections && (
-        <div className="mb-10">
-          <h2 className="text-xl font-semibold text-[var(--color-text)] mb-6">
-            Topics & Labs
-          </h2>
-          <div className="space-y-6">
-            {topic.sections!.map((section) => (
-              <div
-                key={section.week}
-                className="rounded-xl border border-[var(--color-border)] bg-white shadow-sm overflow-hidden"
-              >
-                {/* Section Header */}
-                <div className="px-6 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs font-bold text-white bg-[var(--color-accent)] px-2.5 py-1 rounded-md">
-                      {section.week}
-                    </span>
-                    <h3 className="font-semibold text-[var(--color-text)]">
-                      {section.title}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Section Body */}
-                <div className="px-6 py-4">
-                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-                    {section.summary}
-                  </p>
-
-                  {/* Section Resources */}
-                  <div className="flex flex-wrap gap-2">
-                    {section.resources.map((resource, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)]"
-                      >
-                        <ResourceBadge type={resource.type} />
-                        <span className="text-[var(--color-text)] text-xs">
-                          {resource.title}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Flat Resources (for topics without sections) */}
-      {!hasSections && hasResources && (
+      {/* Resources */}
+      {hasResources && (
         <div className="mb-10">
           <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">
             Content & Resources
@@ -213,7 +168,7 @@ export default async function TopicPage({
       )}
 
       {/* Empty State */}
-      {!hasSections && !hasResources && (
+      {!hasResources && (
         <div className="mb-10 p-8 rounded-xl border-2 border-dashed border-[var(--color-border)] text-center">
           <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[var(--color-surface)] flex items-center justify-center">
             <svg
