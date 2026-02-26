@@ -7,38 +7,28 @@ export function About() {
 
         <div className="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
           <p>
-            AI/ML Engineer specializing in{" "}
+            I build reliable AI systems —{" "}
             <span className="text-[var(--color-text)]">
               LLM orchestration, RAG pipelines, and NLP
             </span>
-            . Currently completing an MSc in Computer Science (AI) at{" "}
+            {" "}— grounded in real engineering rigor.
+            I&apos;m currently completing an MSc in Computer Science (AI) at{" "}
             <span className="text-[var(--color-text)]">
               Queen Mary University of London
             </span>
-            . My thesis research produced a hybrid rule-based + LLM system that generates
-            structured test cases with 92% time reduction and $0.002 cost per test case.
+            , where my thesis produced a hybrid rule-based + LLM pipeline that generates
+            structured test cases with 92% time reduction at ~$0.002 per test case.
           </p>
 
           <p>
-            Before moving into AI full-time, I spent 7+ years as a Senior SDET building
-            production-grade test infrastructure at{" "}
-            <span className="text-[var(--color-text)]">JPMorgan Chase</span>,{" "}
-            <a
-              href="https://www.kandasoft.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[var(--color-accent)] hover:underline"
-            >
-              KandaSoft
-            </a>
-            , and U.S. Bank. That background gives me a practical edge — I build AI systems
-            with the same rigor I applied to testing: reproducible pipelines, measurable outcomes,
-            and clean architecture.
+            Before moving into AI full-time, I spent 7+ years designing production-grade
+            test infrastructure across finance and enterprise teams. That background shapes
+            how I work today: reproducible pipelines, measurable outcomes, clean architecture,
+            and a bias toward systems that hold up in CI/CD — not just demos.
           </p>
 
           <p>
-            I publish daily learning notes, Jupyter notebooks, and deep-dives on ML, NLP,
-            and deep learning on this site and on{" "}
+            On this site (and on{" "}
             <a
               href="https://medium.com/@gulzhasm"
               target="_blank"
@@ -47,16 +37,18 @@ export function About() {
             >
               Medium
             </a>
-            . My goal: build reliable, production-ready AI systems — and share
-            everything I learn along the way.
+            ), I publish learning notes, Jupyter notebooks, and practical deep-dives
+            on ML, NLP, and deep learning — so I can refresh fast before interviews and
+            help others build the same fundamentals. My goal is simple: ship production-ready
+            AI — then document the path.
           </p>
         </div>
 
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
             { label: "Experience", value: "7+ years" },
-            { label: "Focus", value: "AI/ML Engineering" },
-            { label: "Education", value: "MSc AI, QMUL" },
+            { label: "Focus", value: "AI/ML Engineering (LLMs · RAG · NLP · Evaluation)" },
+            { label: "Education", value: "MSc Computer Science (AI), QMUL" },
           ].map((item) => (
             <div
               key={item.label}
@@ -84,21 +76,21 @@ export function About() {
                 company: "KandaSoft",
                 period: "2022 -- Present",
                 highlight:
-                  "Built hybrid AI test generation pipeline (rule-based + LLM, ChromaDB RAG, ADO integration). Led automation across 5 squads, 98% test coverage",
+                  "Built a hybrid AI test-generation pipeline (rule-based + LLM) with RAG (ChromaDB) and Azure DevOps integration. Led automation across 5 squads; designed evaluation metrics, prompt contracts, and structured outputs for deterministic test-case generation",
               },
               {
                 role: "QA Automation Lead",
                 company: "JPMorgan Chase & Co.",
                 period: "2019 -- 2021",
                 highlight:
-                  "Migrated 300+ test cases to BDD Cucumber, reduced PVT execution time by 80%",
+                  "Migrated 300+ end-to-end tests to BDD Cucumber; reduced PVT execution time by 80%. Built reusable automation components and framework structure; led migration strategy",
               },
               {
                 role: "Senior QA / QA Engineer",
                 company: "Swift Prepaid Solutions / U.S. Bank",
                 period: "2017 -- 2019",
                 highlight:
-                  "Built automation frameworks from scratch, enhanced testing efficiency by 80%",
+                  "Built automation frameworks from scratch; improved testing efficiency by ~80%. Owned end-to-end quality lifecycle across UI/API/backend systems",
               },
             ].map((exp) => (
               <div

@@ -67,23 +67,24 @@ export const projects = [
 export const skillCategories = [
   {
     category: "Languages",
-    skills: ["Java", "Python", "C#", "TypeScript", "SQL"],
+    skills: ["Python", "Java", "C#", "TypeScript", "SQL"],
   },
   {
     category: "AI / ML",
     skills: [
-      "LLM Orchestration (OpenAI, Gemini, Anthropic)",
-      "RAG / ChromaDB",
-      "NLP / spaCy",
+      "LLM Orchestration (OpenAI / Gemini / Anthropic)",
+      "RAG & Vector Search (ChromaDB)",
+      "Embeddings",
       "Prompt Engineering",
-      "Embeddings & Vector Search",
+      "NLP (spaCy)",
+      "Evaluation & Metrics",
     ],
   },
   {
-    category: "Test Automation",
+    category: "Test & Quality Engineering",
     skills: [
-      "Selenium WebDriver",
       "Playwright",
+      "Selenium",
       "Appium",
       "RestAssured",
       "WireMock",
@@ -92,15 +93,14 @@ export const skillCategories = [
     ],
   },
   {
-    category: "Infrastructure & Tools",
+    category: "Infra & Delivery",
     skills: [
       "Docker",
       "Azure DevOps / Pipelines",
       "Jenkins",
+      "Git",
       "Spring Boot",
       "Flask",
-      "Git",
-      "Maven",
       "MongoDB",
       "Oracle / MySQL",
     ],
