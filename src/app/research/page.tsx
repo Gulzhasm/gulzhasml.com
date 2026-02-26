@@ -4,12 +4,11 @@ import { research } from "@/lib/constants";
 export const metadata = {
   title: "MSc Research — AI-Driven Test Case Generation with LLMs",
   description:
-    "MSc thesis at QMUL: hybrid rule-based + LLM approach to test case generation. 92% time reduction, 94.4% acceptance criteria coverage, $0.002 per test case.",
+    "MSc thesis: hybrid rule-based + LLM approach to test case generation. 92% time reduction, 94.4% acceptance criteria coverage, $0.002 per test case.",
   keywords: [
     "AI test generation research",
     "LLM test automation",
     "MSc AI thesis",
-    "Queen Mary University of London",
     "hybrid AI approach",
   ],
   openGraph: {

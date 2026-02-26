@@ -7,8 +7,22 @@ export function About() {
 
         <div className="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
           <p>
-            Senior SDET with 7+ years of experience building robust test
-            frameworks in Java and C#. Most recently at{" "}
+            AI/ML Engineer specializing in{" "}
+            <span className="text-[var(--color-text)]">
+              LLM orchestration, RAG pipelines, and NLP
+            </span>
+            . Currently completing an MSc in Computer Science (AI) at{" "}
+            <span className="text-[var(--color-text)]">
+              Queen Mary University of London
+            </span>
+            . My thesis research produced a hybrid rule-based + LLM system that generates
+            structured test cases with 92% time reduction and $0.002 cost per test case.
+          </p>
+
+          <p>
+            Before moving into AI full-time, I spent 7+ years as a Senior SDET building
+            production-grade test infrastructure at{" "}
+            <span className="text-[var(--color-text)]">JPMorgan Chase</span>,{" "}
             <a
               href="https://www.kandasoft.com"
               target="_blank"
@@ -17,30 +31,24 @@ export function About() {
             >
               KandaSoft
             </a>
-            , where I led automation across 5 squads, achieved 98% test
-            coverage, and built E2E frameworks with Playwright and WireMock.
+            , and U.S. Bank. That background gives me a practical edge — I build AI systems
+            with the same rigor I applied to testing: reproducible pipelines, measurable outcomes,
+            and clean architecture.
           </p>
 
           <p>
-            Now transitioning into{" "}
-            <span className="text-[var(--color-text)]">
-              AI/ML Engineering
-            </span>
-            , pursuing an MSc in Computer Science (AI) at{" "}
-            <span className="text-[var(--color-text)]">
-              Queen Mary University of London
-            </span>
-            . My thesis research combines deterministic rule-based systems with
-            Large Language Models to automate test case generation from user
-            stories -- bridging QA engineering with applied AI.
-          </p>
-
-          <p>
-            Previously built BDD frameworks at{" "}
-            <span className="text-[var(--color-text)]">JPMorgan Chase</span>,
-            and established automation strategies at U.S. Bank and Swift Prepaid
-            Solutions. My goal: leverage deep QA domain expertise with modern
-            AI/MLOps to build intelligent engineering systems.
+            I publish daily learning notes, Jupyter notebooks, and deep-dives on ML, NLP,
+            and deep learning on this site and on{" "}
+            <a
+              href="https://medium.com/@gulzhasm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-accent)] hover:underline"
+            >
+              Medium
+            </a>
+            . My goal: build reliable, production-ready AI systems — and share
+            everything I learn along the way.
           </p>
         </div>
 
@@ -72,11 +80,11 @@ export function About() {
           <div className="space-y-6">
             {[
               {
-                role: "Senior SDET / AI Engineer",
+                role: "AI Engineer / Senior SDET",
                 company: "KandaSoft",
                 period: "2022 -- Present",
                 highlight:
-                  "Led automation across 5 squads, 98% test coverage, built hybrid AI test generation pipeline (rule-based + LLM), ChromaDB RAG, ADO integration",
+                  "Built hybrid AI test generation pipeline (rule-based + LLM, ChromaDB RAG, ADO integration). Led automation across 5 squads, 98% test coverage",
               },
               {
                 role: "QA Automation Lead",

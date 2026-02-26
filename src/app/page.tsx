@@ -26,8 +26,11 @@ export default function Home() {
       {/* Welcome */}
       <div className="mb-12">
         <h1 className="text-3xl font-bold text-[var(--color-text)] mb-2">
-          Welcome
+          Gulzhas Mailybayeva — AI/ML Engineer
         </h1>
+        <p className="text-sm text-[var(--color-text-muted)] mb-3">
+          Machine Learning · NLP · LLM Orchestration · RAG
+        </p>
         <p className="text-lg text-[var(--color-text-muted)] max-w-2xl">
           {siteConfig.tagline}
         </p>
@@ -36,8 +39,8 @@ export default function Home() {
       {/* Stats row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
         {[
-          { label: "QMUL Courses", value: "4" },
           { label: "AI Projects", value: "2" },
+          { label: "Research", value: "1" },
           { label: "Topics", value: String(topics.filter((t) => t.category === "topic").length) },
           { label: "Tools & Frameworks", value: String(topics.filter((t) => t.category === "tool").length) },
         ].map((stat) => (
@@ -65,7 +68,7 @@ export default function Home() {
           className="block p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
         >
           <p className="text-xs text-[var(--color-accent)] font-medium mb-1">
-            MSc Thesis &middot; QMUL
+            MSc Thesis
           </p>
           <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
             AI-Driven Test Case Generation: A Hybrid Approach
@@ -125,11 +128,6 @@ export default function Home() {
                   {topic.title}
                 </h3>
               </div>
-              {topic.courseCode && (
-                <p className="text-xs text-[var(--color-accent)] mb-1">
-                  {topic.courseCode}
-                </p>
-              )}
               <p className="text-sm text-[var(--color-text-muted)] line-clamp-2">
                 {topic.description}
               </p>

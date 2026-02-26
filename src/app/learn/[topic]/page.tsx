@@ -14,9 +14,8 @@ export async function generateMetadata({
   const { topic: slug } = await params;
   const topic = getTopicBySlug(slug);
   if (!topic) return { title: "Not Found" };
-  const courseLabel = topic.courseCode ? ` (${topic.courseCode})` : "";
   return {
-    title: `${topic.title}${courseLabel} — Learn AI & Machine Learning`,
+    title: `${topic.title} — Learn AI & Machine Learning`,
     description: `${topic.description} Part of gulzhas.ml learning resources on AI, machine learning, and NLP.`,
     keywords: [...topic.tags, "machine learning", "AI", "learn", topic.title],
     openGraph: {
@@ -70,11 +69,6 @@ export default async function TopicPage({
             <h1 className="text-3xl font-bold text-[var(--color-text)]">
               {topic.title}
             </h1>
-            {topic.courseCode && (
-              <p className="text-sm text-[var(--color-accent)]">
-                {topic.courseCode} &middot; {topic.institution}
-              </p>
-            )}
           </div>
         </div>
         <p className="text-lg text-[var(--color-text-muted)] leading-relaxed">

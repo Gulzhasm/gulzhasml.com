@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "Gulzhas Mailybayeva",
-  title: "Senior SDET | AI/ML Engineer",
-  tagline: "From test automation to AI systems -- building the bridge between QA engineering and applied AI.",
+  title: "AI/ML Engineer",
+  tagline: "AI/ML Engineer building LLM + RAG systems for reliable software quality (ex-Senior SDET).",
   description:
-    "Senior SDET transitioning to AI/ML Engineering. Specializing in LLM orchestration, RAG pipelines, and intelligent test automation. MSc AI candidate at Queen Mary University of London.",
+    "AI/ML Engineer specializing in LLM orchestration, RAG pipelines, and NLP. 7+ years of production engineering experience.",
   url: "https://gulzhasml.com",
   github: "https://github.com/Gulzhasm",
   linkedin: "https://www.linkedin.com/in/gulzhas-mailybayeva",
@@ -110,7 +110,7 @@ export const skillCategories = [
 export const research = {
   title:
     "AI-Driven Test Case Generation: A Hybrid Approach Combining Rule-Based Systems with Large Language Models",
-  institution: "Queen Mary University of London (QMUL)",
+  institution: "Queen Mary University of London",
   degree: "MSc (in progress)",
   abstract:
     "This thesis investigates a hybrid approach to automated test case generation that combines deterministic rule-based scaffolding with Large Language Model correction. Evaluated on a production CAD application (55 user stories, 870 test cases), the system achieved 92% time reduction, $0.002 per test case, and 94.4% acceptance criteria coverage.",

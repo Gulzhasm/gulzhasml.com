@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "AI/ML Engineer specializing in machine learning, NLP, LLM orchestration, and intelligent test automation. MSc AI candidate at Queen Mary University of London. Portfolio featuring AI projects, research, and learning resources.",
+    "AI/ML Engineer specializing in machine learning, NLP, LLM orchestration, and intelligent test automation. Portfolio featuring AI projects, research, and learning resources.",
   keywords: [
     "AI engineer",
     "machine learning",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "deep learning",
     "RAG pipeline",
     "Gulzhas Mailybayeva",
-    "QMUL",
+    "RAG pipeline",
     "AI projects",
     "Python AI",
   ],
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${siteConfig.name} | AI/ML Engineer`,
     description:
-      "AI/ML Engineer specializing in machine learning, NLP, LLM orchestration, and intelligent test automation. MSc AI at QMUL.",
+      "AI/ML Engineer specializing in machine learning, NLP, LLM orchestration, and intelligent test automation.",
     url: siteConfig.url,
     siteName: "gulzhas.ml",
     locale: "en_US",
@@ -80,8 +80,13 @@ const jsonLd = {
       url: siteConfig.url,
       jobTitle: "AI/ML Engineer",
       description:
-        "AI/ML Engineer specializing in machine learning, NLP, LLM orchestration, and intelligent test automation. MSc AI candidate at Queen Mary University of London.",
-      sameAs: [siteConfig.github, siteConfig.linkedin],
+        "AI/ML Engineer specializing in machine learning, NLP, LLM orchestration, and intelligent test automation.",
+      sameAs: [
+        siteConfig.github,
+        siteConfig.linkedin,
+        "https://github.com/Gulzhasm/ai_test_gen",
+        "https://github.com/Gulzhasm/gap-trader",
+      ],
       alumniOf: {
         "@type": "CollegeOrUniversity",
         name: "Queen Mary University of London",

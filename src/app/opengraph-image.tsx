@@ -61,7 +61,7 @@ export default function OgImage() {
             opacity: 0.8,
           }}
         >
-          <span>MSc AI — Queen Mary University of London</span>
+          <span>Machine Learning · NLP · LLM Orchestration · RAG</span>
         </div>
       </div>
     ),
