@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { topics, getTopicBySlug } from "@/lib/topics";
+import { topics, getTopicBySlug, TopicResource } from "@/lib/topics";
 
 export function generateStaticParams() {
   return topics.map((topic) => ({ topic: topic.slug }));
@@ -27,6 +27,68 @@ export async function generateMetadata({
   };
 }
 
+function ResourceBadge({ type }: { type: TopicResource["type"] }) {
+  const label =
+    type === "lab"
+      ? "LAB"
+      : type === "lecture"
+        ? "LEC"
+        : type === "notebook"
+          ? "NB"
+          : type === "tutorial"
+            ? "TUT"
+            : type === "project"
+              ? "PRJ"
+              : "POST";
+
+  const colors: Record<string, string> = {
+    lab: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    lecture: "bg-blue-50 text-blue-700 border-blue-200",
+    notebook: "bg-purple-50 text-purple-700 border-purple-200",
+    project: "bg-amber-50 text-amber-700 border-amber-200",
+    tutorial: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    post: "bg-rose-50 text-rose-700 border-rose-200",
+  };
+
+  return (
+    <span
+      className={`text-[10px] font-bold px-2 py-0.5 rounded border ${colors[type] || "bg-gray-50 text-gray-600 border-gray-200"}`}
+    >
+      {label}
+    </span>
+  );
+}
+
+function ResourceCard({ resource }: { resource: TopicResource }) {
+  return (
+    <div className="p-4 rounded-xl bg-white border border-[var(--color-border)] shadow-sm flex items-start gap-4">
+      <div className="w-8 h-8 rounded-lg bg-[var(--color-accent-light)] flex items-center justify-center shrink-0 mt-0.5">
+        <span className="text-xs font-bold text-[var(--color-accent)]">
+          {resource.type === "lab"
+            ? "LAB"
+            : resource.type === "lecture"
+              ? "LEC"
+              : resource.type === "notebook"
+                ? "NB"
+                : resource.type === "tutorial"
+                  ? "TUT"
+                  : resource.type === "project"
+                    ? "PRJ"
+                    : "POST"}
+        </span>
+      </div>
+      <div>
+        <h3 className="font-medium text-[var(--color-text)]">
+          {resource.title}
+        </h3>
+        <p className="text-sm text-[var(--color-text-muted)]">
+          {resource.description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default async function TopicPage({
   params,
 }: {
@@ -35,6 +97,9 @@ export default async function TopicPage({
   const { topic: slug } = await params;
   const topic = getTopicBySlug(slug);
   if (!topic) notFound();
+
+  const hasSections = topic.sections && topic.sections.length > 0;
+  const hasResources = topic.resources.length > 0;
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
@@ -100,46 +165,73 @@ export default async function TopicPage({
         </div>
       </div>
 
-      {/* Resources */}
-      {topic.resources.length > 0 ? (
+      {/* Week-based Sections */}
+      {hasSections && (
+        <div className="mb-10">
+          <h2 className="text-xl font-semibold text-[var(--color-text)] mb-6">
+            Topics & Labs
+          </h2>
+          <div className="space-y-6">
+            {topic.sections!.map((section) => (
+              <div
+                key={section.week}
+                className="rounded-xl border border-[var(--color-border)] bg-white shadow-sm overflow-hidden"
+              >
+                {/* Section Header */}
+                <div className="px-6 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-bold text-white bg-[var(--color-accent)] px-2.5 py-1 rounded-md">
+                      {section.week}
+                    </span>
+                    <h3 className="font-semibold text-[var(--color-text)]">
+                      {section.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Section Body */}
+                <div className="px-6 py-4">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+                    {section.summary}
+                  </p>
+
+                  {/* Section Resources */}
+                  <div className="flex flex-wrap gap-2">
+                    {section.resources.map((resource, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)]"
+                      >
+                        <ResourceBadge type={resource.type} />
+                        <span className="text-[var(--color-text)] text-xs">
+                          {resource.title}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Flat Resources (for topics without sections) */}
+      {!hasSections && hasResources && (
         <div className="mb-10">
           <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">
             Content & Resources
           </h2>
           <div className="space-y-3">
             {topic.resources.map((resource, i) => (
-              <div
-                key={i}
-                className="p-4 rounded-xl bg-white border border-[var(--color-border)] shadow-sm flex items-start gap-4"
-              >
-                <div className="w-8 h-8 rounded-lg bg-[var(--color-accent-light)] flex items-center justify-center shrink-0 mt-0.5">
-                  <span className="text-xs font-bold text-[var(--color-accent)]">
-                    {resource.type === "lab"
-                      ? "LAB"
-                      : resource.type === "lecture"
-                        ? "LEC"
-                        : resource.type === "notebook"
-                          ? "NB"
-                          : resource.type === "tutorial"
-                            ? "TUT"
-                            : resource.type === "project"
-                              ? "PRJ"
-                              : "POST"}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-medium text-[var(--color-text)]">
-                    {resource.title}
-                  </h3>
-                  <p className="text-sm text-[var(--color-text-muted)]">
-                    {resource.description}
-                  </p>
-                </div>
-              </div>
+              <ResourceCard key={i} resource={resource} />
             ))}
           </div>
         </div>
-      ) : (
+      )}
+
+      {/* Empty State */}
+      {!hasSections && !hasResources && (
         <div className="mb-10 p-8 rounded-xl border-2 border-dashed border-[var(--color-border)] text-center">
           <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[var(--color-surface)] flex items-center justify-center">
             <svg

@@ -5,6 +5,13 @@ export interface TopicResource {
   link?: string;
 }
 
+export interface TopicSection {
+  week: number;
+  title: string;
+  summary: string;
+  resources: TopicResource[];
+}
+
 export interface Topic {
   slug: string;
   title: string;
@@ -14,6 +21,7 @@ export interface Topic {
   category: "topic" | "tool";
   icon: string;
   resources: TopicResource[];
+  sections?: TopicSection[];
   tags: string[];
 }
 
@@ -24,13 +32,134 @@ export const topics: Topic[] = [
     title: "Machine Learning",
     shortTitle: "ML",
     description:
-      "Foundations of machine learning: supervised & unsupervised learning, model evaluation, feature engineering, and practical implementations.",
+      "Foundations of machine learning: supervised & unsupervised learning, model evaluation, feature engineering, and practical implementations with PyTorch and Scikit-learn.",
     overview:
-      "Machine learning is the backbone of modern AI systems. This section covers core ML algorithms, mathematical foundations, model selection, and hands-on implementations using Python and Scikit-learn. Content will grow as I progress through coursework and personal projects.",
+      "A comprehensive journey through core machine learning concepts — from probability theory and linear models to neural networks and deep learning. Each week builds on the previous, combining mathematical foundations with hands-on Python implementations. Topics include regression, classification, clustering, density estimation, dimensionality reduction, and deep learning, all implemented from scratch and using industry-standard libraries like PyTorch and Scikit-learn.",
     category: "topic",
     icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
     resources: [],
-    tags: ["Supervised Learning", "Unsupervised Learning", "Regression", "Classification", "Clustering"],
+    sections: [
+      {
+        week: 1,
+        title: "Introduction to Machine Learning & Python Foundations",
+        summary:
+          "An introduction to the ML landscape: what machine learning is, the difference between supervised and unsupervised learning, and the types of problems ML can solve (regression, classification, clustering). The practical component covers Python fundamentals (variables, data types, control flow, functions) and PyTorch basics — tensor operations, matrix multiplication, broadcasting, reshaping, nn.Module, autograd, and building simple MLP pipelines for binary classification, multi-class classification, multi-label classification, and regression tasks.",
+        resources: [
+          { title: "Introduction to Machine Learning", description: "Overview of ML paradigms: supervised vs. unsupervised learning, model types, and the ML workflow from data to prediction.", type: "lecture" },
+          { title: "Python Fundamentals", description: "Core Python concepts: variables, data types (lists, tuples, dicts, sets), operators, control flow, input/output, and modules.", type: "lab" },
+          { title: "PyTorch Basics I — Tensors & Operations", description: "Tensor creation, matrix multiplication (torch.matmul), element-wise operations (Hadamard product), broadcasting rules, transposing, reshaping, and in-place operations.", type: "notebook" },
+          { title: "PyTorch Basics II — Training Pipelines", description: "Building complete ML pipelines: Dataset/DataLoader, train/val/test splits, SimpleMLP with nn.Module, loss functions (BCE, CrossEntropy, MSE), Adam optimizer, and training loops.", type: "notebook" },
+        ],
+      },
+      {
+        week: 2,
+        title: "Probability Theory for Machine Learning",
+        summary:
+          "Foundational probability concepts essential for ML: Bayes' rule and its applications (loan approval systems, the prosecutor's fallacy), Gaussian distributions and their parameters, covariance and Pearson's correlation coefficient, joint and conditional probability distributions, and marginal probabilities. The lab involves implementing Bayes' rule calculations, plotting Gaussian PDFs with varying parameters, computing covariance/PCC for real data (exploring correlation vs. causation), and analyzing the Iris dataset's feature relationships through 2D histograms and probability matrices.",
+        resources: [
+          { title: "Probability Foundations", description: "Bayes' rule, prior/posterior/likelihood, Gaussian distribution, random variables, covariance, and Pearson's correlation coefficient.", type: "lecture" },
+          { title: "Probability Lab", description: "Implementing Bayes' rule for real scenarios, plotting Gaussian PDFs, computing covariance and PCC, analyzing Iris dataset joint/conditional/marginal probabilities.", type: "lab" },
+        ],
+      },
+      {
+        week: 3,
+        title: "Linear Regression",
+        summary:
+          "Linear regression theory and implementation from scratch using PyTorch. Covers the hypothesis function y = w^T x, mean squared error (MSE) cost function, gradient descent optimization, and feature normalization (z-score standardization). The lab uses the Diabetes dataset to predict disease progression, implementing custom LinearRegression layers, gradient descent steps, and exploring the effect of learning rate on convergence. Extends to polynomial regression with L2 regularization to handle overfitting — fitting a 5th-order polynomial while penalizing large weights to control model complexity.",
+        resources: [
+          { title: "Linear Regression Theory", description: "Hypothesis function, MSE cost, gradient descent derivation, feature normalization, overfitting/underfitting, and L2 regularization.", type: "lecture" },
+          { title: "Regression Lab (PyTorch)", description: "Building linear regression from scratch: custom nn.Module layer, MSE implementation, gradient descent, Diabetes dataset prediction, learning rate analysis.", type: "lab" },
+          { title: "Regularized Polynomial Regression", description: "5th-order polynomial fitting with L2 regularization. Exploring how lambda controls model complexity and prevents overfitting on small datasets.", type: "notebook" },
+          { title: "Regression Analysis Report", description: "Analysis of weight interpretation (BMI and sex effects on diabetes), learning rate impact on convergence, and regularization strength trade-offs.", type: "project" },
+        ],
+      },
+      {
+        week: 4,
+        title: "Linear Classification & Logistic Regression",
+        summary:
+          "Moving from regression to classification: the sigmoid function as a decision boundary, logistic regression for binary classification, and the cross-entropy (BCE) loss function. Implementation includes building a custom LogisticRegression class in PyTorch, deriving and coding gradient descent for BCE loss, visualizing decision boundaries, and extending to multi-class classification using the one-vs-all strategy with built-in PyTorch methods (nn.Sequential, nn.Sigmoid, optim.SGD). Analysis of the XOR problem reveals the fundamental limitations of linear classifiers.",
+        resources: [
+          { title: "Classification & Logistic Regression", description: "Sigmoid function, decision boundaries, binary cross-entropy loss, gradient descent for classification, and multi-class one-vs-all strategy.", type: "lecture" },
+          { title: "Classification Lab (PyTorch)", description: "Implementing sigmoid, LogisticRegression class, BCE loss, decision boundary visualization on Iris dataset, multi-class 1-vs-all with softmax.", type: "lab" },
+          { title: "Classification Report", description: "Decision boundary analysis, multi-class prediction accuracy, and discussion of XOR as a non-linearly separable problem.", type: "project" },
+        ],
+      },
+      {
+        week: 5,
+        title: "Advanced Classification — Decision Trees & Naive Bayes",
+        summary:
+          "Beyond logistic regression: multinomial logistic regression (softmax), decision trees using entropy-based information gain, and Gaussian Naive Bayes. Applied to both the Iris dataset and the much larger Forest Covertype dataset (580K samples, 54 features, 7 classes). Introduces critical ML concepts: confusion matrix analysis, handling class imbalance with weighted loss and SMOTE (Synthetic Minority Over-sampling Technique), and comparing classifier performance across algorithms. Scikit-learn becomes the primary framework here.",
+        resources: [
+          { title: "Classification II — Trees & Bayes", description: "Multinomial logistic regression, decision trees (entropy, information gain), Gaussian Naive Bayes, and probabilistic classification.", type: "lecture" },
+          { title: "Advanced Classification Lab", description: "Comparing LogisticRegression, DecisionTreeClassifier, and GaussianNB on Forest Covertype. Confusion matrices, class imbalance handling with SMOTE.", type: "lab" },
+        ],
+      },
+      {
+        week: 6,
+        title: "Neural Networks",
+        summary:
+          "Introduction to neural networks: multi-layer perceptrons (MLPs), activation functions (ReLU, sigmoid, softmax), the universal approximation theorem, and backpropagation. The lab first revisits the XOR problem — demonstrating that a 2-layer neural network can solve what linear classifiers cannot. Then builds a complete MLP classifier for the Iris dataset using PyTorch's nn.Module with customizable architecture (hidden layers, neurons, activation functions), proper training/validation loops, and performance evaluation.",
+        resources: [
+          { title: "Neural Networks Fundamentals", description: "MLP architecture, activation functions, universal approximation theorem, backpropagation algorithm, and weight initialization.", type: "lecture" },
+          { title: "Neural Networks Lab (PyTorch)", description: "Solving XOR with a 2-layer MLP, building configurable neural networks for Iris classification, training loops with validation.", type: "lab" },
+          { title: "Neural Network Report", description: "Architecture design choices, XOR solution analysis, comparison of NN vs. logistic regression accuracy, and training dynamics.", type: "project" },
+        ],
+      },
+      {
+        week: 7,
+        title: "Clustering — K-Means & Hierarchical Methods",
+        summary:
+          "Unsupervised learning begins with clustering: the K-means algorithm (initialization, assignment, update steps), selecting optimal K using the elbow method (inertia plot), and hierarchical agglomerative clustering with dendrograms. Applied to the Iris dataset for comparison with known labels, then to a real-world customer segmentation task using the iFood marketing dataset (2206 customers, features like income, spending, demographics). Explores how clustering reveals natural groupings without supervision.",
+        resources: [
+          { title: "Clustering Algorithms", description: "K-means algorithm, convergence properties, initialization strategies, elbow method, hierarchical/agglomerative clustering, and dendrograms.", type: "lecture" },
+          { title: "Clustering Lab", description: "K-means on Iris dataset, elbow curve analysis, hierarchical clustering with dendrograms, customer segmentation on iFood marketing data.", type: "lab" },
+        ],
+      },
+      {
+        week: 8,
+        title: "Density Estimation — Mixture of Gaussians & EM",
+        summary:
+          "Parametric density estimation using Mixture of Gaussians (MoG) trained with the Expectation-Maximization (EM) algorithm. Covers the mathematical formulation of Gaussian mixtures (mixing coefficients, means, covariances), the E-step (responsibility calculation) and M-step (parameter updates), and convergence via log-likelihood monitoring. Applied to vowel phoneme classification using formant frequencies (F1, F2), building a Bayesian classifier from two class-conditional MoGs. Explores the singularity problem in EM and strategies to overcome it.",
+        resources: [
+          { title: "Density Estimation & EM Algorithm", description: "Mixture of Gaussians model, EM algorithm (E-step, M-step), log-likelihood convergence, and Bayesian classification from density models.", type: "lecture" },
+          { title: "Density Estimation Lab", description: "Implementing MoG with EM for vowel phoneme data, building classifiers from density estimates, exploring K values and singularity handling.", type: "lab" },
+          { title: "Density Estimation Report", description: "MoG parameter analysis, classification accuracy comparison for K=3 vs K=6, decision boundary visualization, and singularity problem solutions.", type: "project" },
+        ],
+      },
+      {
+        week: 9,
+        title: "Feature Selection & Dimensionality Reduction",
+        summary:
+          "Techniques for handling high-dimensional data: Principal Component Analysis (PCA) from scratch — computing covariance matrices, eigenvalue decomposition, selecting principal components, and reconstructing data. Quantitative evaluation through explained variance ratios and qualitative evaluation through 2D/3D visualization. Practical PCA applications using sklearn on real datasets. Feature selection methods including filter methods (variance threshold, correlation) and wrapper methods (forward/backward selection) applied to the Diabetes dataset.",
+        resources: [
+          { title: "PCA & Feature Selection", description: "Dimensionality reduction motivation, PCA derivation (covariance, eigenvalues, projection), explained variance, and feature selection methods.", type: "lecture" },
+          { title: "Dimensionality Reduction Lab", description: "PCA from scratch with eigenvectors, explained variance analysis, 2D visualization of high-dimensional data, feature selection on Diabetes dataset.", type: "lab" },
+        ],
+      },
+      {
+        week: 10,
+        title: "Deep Learning — CNNs, Transfer Learning & Autoencoders",
+        summary:
+          "Deep learning architectures and modern training techniques: Convolutional Neural Networks (CNNs) for image classification using ResNet18 on CIFAR-10, transfer learning by fine-tuning pretrained ImageNet models, and unsupervised representation learning with autoencoders. Covers the practical aspects of deep learning: GPU utilization, data augmentation, learning rate scheduling, early stopping, and comparing training from scratch vs. leveraging pretrained weights. Demonstrates how transfer learning dramatically reduces training time and improves accuracy.",
+        resources: [
+          { title: "Deep Learning & CNNs", description: "Convolutional neural networks, pooling, ResNet architecture, transfer learning, fine-tuning, and autoencoders for unsupervised learning.", type: "lecture" },
+          { title: "Deep Learning Lab (CIFAR-10)", description: "Training ResNet18 from scratch vs. transfer learning on CIFAR-10, fine-tuning pretrained models, and building autoencoders.", type: "lab" },
+        ],
+      },
+    ],
+    tags: [
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Regression",
+      "Classification",
+      "Clustering",
+      "Neural Networks",
+      "Deep Learning",
+      "PyTorch",
+      "Scikit-learn",
+      "PCA",
+      "Density Estimation",
+    ],
   },
   {
     slug: "ai",
