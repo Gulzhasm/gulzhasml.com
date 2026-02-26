@@ -2,8 +2,16 @@ import Link from "next/link";
 import { posts } from "@/lib/posts";
 
 export const metadata = {
-  title: "Blog | gulzhas.ml",
-  description: "Writing about AI, ML, NLP, and engineering",
+  title: "Blog — AI, Machine Learning, NLP & Engineering",
+  description:
+    "Articles on machine learning, AI engineering, NLP, LLM orchestration, test automation, and Python development. Practical insights from real projects.",
+  openGraph: {
+    title: "Blog — AI, Machine Learning & Engineering",
+    description:
+      "Articles on machine learning, AI engineering, NLP, LLM orchestration, and Python development.",
+    url: "https://gulzhasml.com/blog",
+  },
+  alternates: { canonical: "https://gulzhasml.com/blog" },
 };
 
 export default function BlogPage() {

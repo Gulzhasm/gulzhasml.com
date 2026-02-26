@@ -2,8 +2,16 @@ import Link from "next/link";
 import { siteConfig, skillCategories } from "@/lib/constants";
 
 export const metadata = {
-  title: "About | gulzhas.ml",
-  description: `About ${siteConfig.name} — Senior SDET transitioning to AI/ML Engineering`,
+  title: "About Gulzhas Mailybayeva — AI/ML Engineer, NLP & Test Automation",
+  description:
+    "7+ years in QA/SDET, now building AI systems. Specializing in machine learning, NLP, LLM orchestration, and RAG pipelines. MSc AI at Queen Mary University of London.",
+  openGraph: {
+    title: "About Gulzhas Mailybayeva — AI/ML Engineer",
+    description:
+      "7+ years in QA/SDET, now building AI systems. Machine learning, NLP, LLM orchestration. MSc AI at QMUL.",
+    url: "https://gulzhasml.com/about",
+  },
+  alternates: { canonical: "https://gulzhasml.com/about" },
 };
 
 export default function AboutPage() {

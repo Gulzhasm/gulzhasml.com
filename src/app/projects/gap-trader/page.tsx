@@ -1,8 +1,16 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "gap-trader | gulzhas.ml",
-  description: "AI-Powered Stock Trading Assistant",
+  title: "gap-trader — AI-Powered Stock Trading Assistant",
+  description:
+    "AI stock trading assistant with gap scanning, watchlists, trade logging, and performance analytics. Built with Python, Flask, SQLAlchemy, and real-time market data.",
+  openGraph: {
+    title: "gap-trader — AI Stock Trading Assistant",
+    description:
+      "AI-powered gap trading assistant with real-time market data, watchlists, and performance analytics.",
+    url: "https://gulzhasml.com/projects/gap-trader",
+  },
+  alternates: { canonical: "https://gulzhasml.com/projects/gap-trader" },
 };
 
 export default function GapTraderPage() {

@@ -14,9 +14,17 @@ export async function generateMetadata({
   const { topic: slug } = await params;
   const topic = getTopicBySlug(slug);
   if (!topic) return { title: "Not Found" };
+  const courseLabel = topic.courseCode ? ` (${topic.courseCode})` : "";
   return {
-    title: `${topic.title} | gulzhas.ml`,
-    description: topic.description,
+    title: `${topic.title}${courseLabel} — Learn AI & Machine Learning`,
+    description: `${topic.description} Part of gulzhas.ml learning resources on AI, machine learning, and NLP.`,
+    keywords: [...topic.tags, "machine learning", "AI", "learn", topic.title],
+    openGraph: {
+      title: `${topic.title} — Learn AI & Machine Learning`,
+      description: topic.description,
+      url: `https://gulzhasml.com/learn/${slug}`,
+    },
+    alternates: { canonical: `https://gulzhasml.com/learn/${slug}` },
   };
 }
 

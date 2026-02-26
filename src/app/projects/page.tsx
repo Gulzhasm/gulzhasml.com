@@ -2,8 +2,16 @@ import Link from "next/link";
 import { projects } from "@/lib/constants";
 
 export const metadata = {
-  title: "Projects | gulzhas.ml",
-  description: "AI and engineering projects by Gulzhas Mailybayeva",
+  title: "AI & Machine Learning Projects",
+  description:
+    "AI/ML projects: LLM-powered test case generation, stock trading assistant, RAG pipelines. Built with Python, Gemini, ChromaDB, spaCy, and more.",
+  openGraph: {
+    title: "AI & Machine Learning Projects — Gulzhas Mailybayeva",
+    description:
+      "AI/ML projects featuring LLM pipelines, RAG systems, and intelligent automation.",
+    url: "https://gulzhasml.com/projects",
+  },
+  alternates: { canonical: "https://gulzhasml.com/projects" },
 };
 
 export default function ProjectsPage() {

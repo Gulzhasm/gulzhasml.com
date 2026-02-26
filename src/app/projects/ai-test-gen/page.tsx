@@ -1,8 +1,25 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "ai-test-gen | gulzhas.ml",
-  description: "AI-Powered Test Case Generation Framework",
+  title: "ai-test-gen — AI-Powered Test Case Generation with LLM",
+  description:
+    "Hybrid rule-based + LLM pipeline generating test cases from user stories. 92% time reduction, $0.002/test case. Built with Python, Gemini 2.5 Flash, ChromaDB, and spaCy.",
+  keywords: [
+    "AI test generation",
+    "LLM test automation",
+    "automated test cases",
+    "Gemini AI",
+    "ChromaDB",
+    "spaCy NLP",
+    "Azure DevOps",
+  ],
+  openGraph: {
+    title: "ai-test-gen — AI-Powered Test Case Generation",
+    description:
+      "Hybrid rule-based + LLM pipeline: 92% time reduction, $0.002 per test case. Python, Gemini, ChromaDB, spaCy.",
+    url: "https://gulzhasml.com/projects/ai-test-gen",
+  },
+  alternates: { canonical: "https://gulzhasml.com/projects/ai-test-gen" },
 };
 
 export default function AiTestGenPage() {

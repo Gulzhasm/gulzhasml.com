@@ -1,7 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/lib/constants";
 import { topics } from "@/lib/topics";
 import { posts } from "@/lib/posts";
+
+export const metadata: Metadata = {
+  title: "Gulzhas Mailybayeva | AI/ML Engineer — Machine Learning, NLP, LLM Orchestration",
+  description:
+    "AI/ML Engineer portfolio featuring machine learning projects, NLP research, LLM orchestration, RAG pipelines, and intelligent test automation. MSc AI at Queen Mary University of London.",
+  openGraph: {
+    title: "Gulzhas Mailybayeva | AI/ML Engineer",
+    description:
+      "Portfolio featuring AI/ML projects, NLP research, and learning resources in machine learning, deep learning, and LLM orchestration.",
+    url: "https://gulzhasml.com",
+  },
+  alternates: { canonical: "https://gulzhasml.com" },
+};
 
 export default function Home() {
   const featuredTopics = topics.filter((t) => t.category === "topic").slice(0, 4);
