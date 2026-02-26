@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Gulzhas Mailybayeva",
-  title: "AI/ML Engineer",
+  title: "AI/ML Engineer | LLMs, RAG, NLP",
   tagline: "AI/ML Engineer building LLM + RAG systems for reliable software quality (ex-Senior SDET).",
   description:
     "AI/ML Engineer specializing in LLM orchestration, RAG pipelines, and NLP. 7+ years of production engineering experience.",

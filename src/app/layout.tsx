@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     "deep learning",
     "RAG pipeline",
     "Gulzhas Mailybayeva",
-    "RAG pipeline",
     "AI projects",
     "Python AI",
   ],

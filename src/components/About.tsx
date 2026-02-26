@@ -7,24 +7,28 @@ export function About() {
 
         <div className="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
           <p>
-            I build reliable AI systems —{" "}
+            AI/ML Engineer focused on{" "}
             <span className="text-[var(--color-text)]">
               LLM orchestration, RAG pipelines, and NLP
             </span>
-            {" "}— grounded in real engineering rigor.
+            {" "}— with a systems mindset: evaluation, reproducibility, and production-readiness.
+          </p>
+
+          <p>
             I&apos;m currently completing an MSc in Computer Science (AI) at{" "}
             <span className="text-[var(--color-text)]">
               Queen Mary University of London
             </span>
-            , where my thesis produced a hybrid rule-based + LLM pipeline that generates
-            structured test cases with 92% time reduction at ~$0.002 per test case.
+            . My thesis research produced a hybrid rule-based + LLM pipeline that generates
+            structured test cases from user stories, delivering 92% time reduction at ~$0.002
+            per test case.
           </p>
 
           <p>
-            Before moving into AI full-time, I spent 7+ years designing production-grade
-            test infrastructure across finance and enterprise teams. That background shapes
-            how I work today: reproducible pipelines, measurable outcomes, clean architecture,
-            and a bias toward systems that hold up in CI/CD — not just demos.
+            Before focusing on AI full-time, I spent years building large-scale engineering
+            automation in enterprise environments. That experience shaped how I build AI today:
+            clean interfaces, measurable outcomes, robust pipelines, and a strong bias toward
+            systems that work reliably outside the demo.
           </p>
 
           <p>
@@ -37,9 +41,13 @@ export function About() {
             >
               Medium
             </a>
-            ), I publish learning notes, Jupyter notebooks, and practical deep-dives
-            on ML, NLP, and deep learning — so I can help others learn AI/ML fundamentals,build the same fundamentals. My goal is simple: ship production-ready
-            AI — then document the path.
+            ), I publish daily learning notes, Jupyter notebooks, and deep dives on ML, NLP,
+            and deep learning — designed as fast refreshers for interviews and practical
+            references for building real systems.
+          </p>
+
+          <p className="text-[var(--color-text)]">
+            Open to: AI/ML Engineer · Applied AI · LLM / RAG Engineer · ML Systems / MLOps (London / Remote)
           </p>
         </div>
 
@@ -66,7 +74,7 @@ export function About() {
         {/* Experience timeline */}
         <div className="mt-12">
           <h3 className="text-xl font-semibold text-[var(--color-text)] mb-6">
-            Experience
+            Engineering Experience
           </h3>
           <div className="space-y-6">
             {[
