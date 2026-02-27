@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig, projects } from "@/lib/constants";
 import { topics } from "@/lib/topics";
 import { posts } from "@/lib/posts";
 
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
     title: "Gulzhas Mailybayeva | AI/ML Engineer",
     description:
       "Portfolio featuring AI/ML projects, NLP research, and learning resources in machine learning, deep learning, and LLM orchestration.",
-    url: "https://gulzhasml.com",
+    url: siteConfig.url,
   },
-  alternates: { canonical: "https://gulzhasml.com" },
+  alternates: { canonical: siteConfig.url },
 };
 
 export default function Home() {
@@ -39,10 +39,10 @@ export default function Home() {
       {/* Stats row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
         {[
-          { label: "AI Projects", value: "2" },
-          { label: "Research", value: "1" },
-          { label: "Topics", value: String(topics.filter((t) => t.category === "topic").length) },
-          { label: "Tools & Frameworks", value: String(topics.filter((t) => t.category === "tool").length) },
+          { label: "AI Systems Shipped", value: "2" },
+          { label: "Research Projects", value: "1" },
+          { label: "Generated Test Cases", value: "207" },
+          { label: "Learning Topics", value: String(topics.filter((t) => t.category === "topic").length) },
         ].map((stat) => (
           <div
             key={stat.label}
@@ -171,40 +171,44 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Flagship project */}
+      {/* Flagship systems */}
       <div className="mb-12">
         <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">
-          Featured Project
+          Flagship Systems
         </h2>
-        <Link
-          href="/projects/ai-test-gen"
-          className="block p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
-        >
-          <h3 className="text-lg font-semibold text-[var(--color-text)] mb-1">
-            ai-test-gen
-          </h3>
-          <p className="text-sm text-[var(--color-accent)] mb-2">
-            AI-Powered Test Case Generation Framework
-          </p>
-          <p className="text-sm text-[var(--color-text-muted)]">
-            A hybrid rule-based + LLM pipeline that generates structured manual
-            test cases from Azure DevOps user stories. Combines deterministic
-            scaffolding with Gemini 2.5 Flash, ChromaDB for semantic step
-            matching, and automated upload to ADO Test Plans.
-          </p>
-          <div className="flex flex-wrap gap-2 mt-4">
-            {["Python", "Gemini 2.5 Flash", "ChromaDB", "spaCy", "Azure DevOps API"].map(
-              (tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-2 py-1 rounded-md bg-[var(--color-surface)] text-[var(--color-text-muted)]"
-                >
-                  {tag}
-                </span>
-              )
-            )}
-          </div>
-        </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {projects
+            .filter((p) =>
+              ["ai-test-gen", "ai-gap-trading-forecaster"].includes(p.title),
+            )
+            .map((project) => (
+              <Link
+                key={project.title}
+                href={`/projects/${project.title}`}
+                className="block p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
+              >
+                <h3 className="text-lg font-semibold text-[var(--color-text)] mb-1">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-[var(--color-accent)] mb-2">
+                  {project.subtitle}
+                </p>
+                <p className="text-sm text-[var(--color-text-muted)] mb-4">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.slice(0, 4).map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2 py-1 rounded-md bg-[var(--color-surface)] text-[var(--color-text-muted)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+        </div>
       </div>
 
       {/* Recent posts */}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTopicBySlug, TopicResource } from "@/lib/topics";
+import { siteConfig } from "@/lib/constants";
 import { notFound } from "next/navigation";
 
 export const metadata = {
@@ -19,9 +20,9 @@ export const metadata = {
     title: "Machine Learning — Learn AI & Machine Learning",
     description:
       "Comprehensive ML learning resources: theory and practice from fundamentals to deep learning.",
-    url: "https://gulzhasml.com/learn/ml",
+    url: `${siteConfig.url}/learn/ml`,
   },
-  alternates: { canonical: "https://gulzhasml.com/learn/ml" },
+  alternates: { canonical: `${siteConfig.url}/learn/ml` },
 };
 
 function ResourceBadge({ type }: { type: TopicResource["type"] }) {

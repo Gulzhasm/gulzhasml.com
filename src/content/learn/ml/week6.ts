@@ -3,173 +3,134 @@ import type { StructuredContent } from "@/lib/structured-content";
 export const week6Content: Record<string, StructuredContent> = {
   "neural-networks-theory": {
     overview:
-      "Neural networks generalise linear models by composing many simple nonlinear units. This chapter introduces perceptrons, activation functions, random initialization and the backpropagation algorithm, culminating in multi-layer perceptrons that can solve XOR and more complex tasks.",
+      "Neural networks extend linear classifiers by stacking layers of nonlinear transformations. This chapter develops the perceptron model, explains why single-layer networks fail on XOR, introduces multi-layer perceptrons, and derives the four-step backpropagation algorithm from first principles.",
     youWillLearn: [
-      "How perceptrons compute weighted sums and apply nonlinear activations",
-      "Why activation functions such as sigmoid and ReLU are needed",
-      "The structure of a multilayer perceptron and forward propagation",
-      "Backpropagation as an application of the chain rule",
-      "The role of random weight initialization and symmetry breaking",
+      "The perceptron as a weighted sum passed through an activation function",
+      "Why linear classifiers cannot solve XOR and how hidden layers fix this",
+      "Random weight initialisation and the symmetry-breaking argument",
+      "The four steps of backpropagation derived from the chain rule",
+      "How varying hidden-layer width affects capacity and generalisation",
     ],
     mainContent: [
       {
-        heading: "Perceptrons as Building Blocks",
+        heading: "The Perceptron Model",
         body:
-          "A perceptron receives inputs x ∈ ℝᵈ, computes z = wᵀx + b, and produces an output a = φ(z), where φ is an activation function such as sigmoid or ReLU. Geometrically this corresponds to projecting x onto w, shifting by b, and passing through a nonlinearity. As with logistic regression, a single perceptron with a step or sigmoid activation can implement any linear decision boundary.",
+          "A perceptron receives inputs x\u2081, x\u2082, \u2026, x\u2099, multiplies each by a learned weight, sums the results, adds a bias term, and passes the total through an activation function: output = \u03c3(w\u2081x\u2081 + w\u2082x\u2082 + \u2026 + w\u2099x\u2099 + b). With a sigmoid activation \u03c3(z) = 1 / (1 + e\u207b\u1dbb), the output lies in (0, 1) and can be interpreted as a probability. A single perceptron is equivalent to logistic regression \u2014 it can separate any two classes that are linearly separable, but nothing more complex.",
       },
       {
-        heading: "Activation Functions",
+        heading: "The XOR Problem and Hidden Layers",
         body:
-          "Without nonlinear activations, stacking linear layers would collapse to a single linear transformation. Common activations include sigmoid, tanh and ReLU. Sigmoid and tanh are bounded and saturating; they are useful for probabilistic outputs but can suffer from vanishing gradients in deep networks. ReLU(z) = max(0, z) is unbounded on the positive side and zero for negative inputs, which often leads to faster training and mitigates vanishing gradients, though it can cause 'dead' neurons when weights push activations permanently negative.",
+          "XOR has four points: (0,0)\u21920, (0,1)\u21921, (1,0)\u21921, (1,1)\u21920. No single straight line can separate the 1s from the 0s. This was famously proven by Minsky and Papert in 1969 and stalled neural network research for over a decade. The fix is to add a hidden layer: the hidden neurons first transform the input space into a new representation where the classes become linearly separable, and then the output neuron draws a straight boundary in that transformed space. With just two hidden neurons and sigmoid activations, a network can solve XOR perfectly.",
       },
       {
-        heading: "Multilayer Perceptrons and XOR",
+        heading: "Why Random Initialisation Matters",
         body:
-          "A multilayer perceptron (MLP) stacks layers of perceptrons such that each hidden layer computes a nonlinear transformation of the previous layer’s activations. Even a tiny MLP with a single hidden layer of just two or three units can solve XOR by carving feature space into nonlinear regions. This demonstrates the universal approximation property: with enough hidden units, an MLP can approximate any continuous function on a compact domain.",
+          "If all weights are initialised to zero, every neuron in a layer computes the same output, receives the same gradient, and updates identically \u2014 they remain copies of each other forever. This is called the symmetry problem. Random initialisation breaks the symmetry so that neurons can specialise. The scale matters too: weights drawn from a distribution with standard deviation \u2248 1/\u221a(fan_in) keep activations and gradients in a reasonable range for sigmoid networks, preventing both saturation (outputs stuck near 0 or 1 where gradients vanish) and explosion.",
       },
       {
-        heading: "Backpropagation via the Chain Rule",
+        heading: "Backpropagation in Four Steps",
         body:
-          "Backpropagation efficiently computes gradients of a loss function with respect to all network parameters by applying the chain rule layer by layer in reverse. Conceptually it proceeds in four steps: (1) compute activations at each layer via forward pass, (2) compute the loss and its derivative with respect to the output layer activations, (3) propagate derivatives backwards through each layer using local Jacobians, and (4) update weights using gradient descent. This is not a 'magic' algorithm; it is simply systematic application of calculus in a computational graph.",
+          "Backpropagation is just the chain rule applied systematically. Step 1 \u2014 Output deltas: compute \u03b4\u2096 = (o\u2096 \u2212 t\u2096) \u00b7 \u03c3\u2032(net\u2096), where o\u2096 is the output, t\u2096 is the target, and \u03c3\u2032 is the derivative of the activation (for sigmoid, \u03c3\u2032 = \u03c3(1\u2212\u03c3)). Step 2 \u2014 Hidden deltas: propagate the error backward via \u03b4\u2c7c = (\u03a3\u2096 \u03b4\u2096 \u00b7 w\u2c7c\u2096) \u00b7 \u03c3\u2032(net\u2c7c), where w\u2c7c\u2096 are the weights connecting hidden neuron j to output neuron k. Step 3 \u2014 Update output weights: w\u2c7c\u2096 \u2190 w\u2c7c\u2096 \u2212 \u03b7 \u00b7 \u03b4\u2096 \u00b7 h\u2c7c, where h\u2c7c is the hidden neuron's output and \u03b7 is the learning rate. Step 4 \u2014 Update hidden weights: w\u1d62\u2c7c \u2190 w\u1d62\u2c7c \u2212 \u03b7 \u00b7 \u03b4\u2c7c \u00b7 x\u1d62. Repeat for every training example.",
       },
       {
-        heading: "Random Initialization and Symmetry Breaking",
+        heading: "Network Width and the Capacity\u2013Generalisation Trade-off",
         body:
-          "If you initialise all weights in a layer identically, each neuron in that layer computes the same function and receives identical gradients, so they remain identical through training. Random initialization breaks this symmetry, enabling different neurons to specialise in different features. Initialisation scale also matters: too large and activations explode or saturate; too small and signals vanish. He and Xavier initialisations are principled schemes that choose variance based on fan-in and fan-out.",
+          "A network with more hidden neurons has greater capacity \u2014 it can represent more complex decision boundaries. On Iris, training MLPs with 1, 2, 4, 8, 16 and 32 hidden neurons reveals a pattern: too few neurons underfit (the boundary is too simple), a moderate number fits well, and too many neurons risk overfitting (the boundary becomes unnecessarily wiggly). The sweet spot depends on the complexity of the data. Monitoring validation loss alongside training loss is the practical way to detect when you have crossed from useful capacity into memorisation.",
       },
     ],
     examples: [
       {
-        title: "Manual XOR Solution with a 2-2-1 Network",
-        description:
-          "Construct a tiny network by hand that solves XOR exactly.",
+        title: "Sigmoid Activation and Its Derivative",
+        description: "Compute the sigmoid output and its gradient for backpropagation.",
         code:
-          "# Hidden layer weights chosen to carve input space into regions\nimport numpy as np\n\n# XOR inputs\nX = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])\ny = np.array([[0], [1], [1], [0]])\n\n# Example parameters (one possible solution)\nW1 = np.array([[1, 1], [1, 1]])\nb1 = np.array([0, -1])\nW2 = np.array([[1], [-2]])\nb2 = np.array([0.5])\n\nsigmoid = lambda z: 1 / (1 + np.exp(-z))\n\nh = sigmoid(X @ W1 + b1)\nout = sigmoid(h @ W2 + b2)\nprint(np.round(out))  # should approximate y",
+          "import numpy as np\n\ndef sigmoid(z):\n    return 1 / (1 + np.exp(-z))\n\ndef sigmoid_derivative(z):\n    s = sigmoid(z)\n    return s * (1 - s)\n\nz = np.array([-2, 0, 2])\nprint(\"sigmoid:\", sigmoid(z))\nprint(\"derivative:\", sigmoid_derivative(z))",
+      },
+      {
+        title: "Manual Forward Pass for XOR",
+        description: "A 2-input, 2-hidden, 1-output network forward pass.",
+        code:
+          "import numpy as np\n\nW_hidden = np.array([[5.0, 5.0], [5.0, 5.0]])\nb_hidden = np.array([-2.0, -7.0])\nW_out = np.array([[10.0, -10.0]])\nb_out = np.array([-5.0])\n\ndef sigmoid(z):\n    return 1 / (1 + np.exp(-z))\n\nfor x in [[0,0], [0,1], [1,0], [1,1]]:\n    x = np.array(x)\n    hidden = sigmoid(W_hidden @ x + b_hidden)\n    output = sigmoid(W_out @ hidden + b_out)\n    print(f\"Input {x} -> Output {output[0]:.3f}\")",
       },
     ],
     commonMistakes: [
       {
-        mistake: "Thinking backpropagation is fundamentally different from gradient descent",
-        why:
-          "Backprop is simply an efficient way to compute gradients for gradient descent in layered architectures.",
-        fix:
-          "View backprop as repeated application of the chain rule on a computational graph rather than as a black-box algorithm.",
+        mistake: "Initialising all weights to zero",
+        why: "Neurons stay identical throughout training due to symmetry \u2014 the network effectively has one neuron per layer.",
+        fix: "Use random initialisation with appropriate scale, e.g. np.random.randn(fan_in, fan_out) * np.sqrt(1/fan_in).",
       },
       {
-        mistake:
-          "Initialising all weights to zero or with too small variance in deep networks",
-        why:
-          "Zero initialisation prevents symmetry breaking; tiny variance can cause vanishing signals and gradients.",
-        fix:
-          "Use principled random initialisers (e.g., Xavier, He) and verify activation statistics in early layers.",
+        mistake: "Using a very large learning rate with sigmoid activations",
+        why: "Weights grow large, activations saturate near 0 or 1, and gradients vanish \u2014 training stalls.",
+        fix: "Start with a small learning rate (0.01\u20130.1 for sigmoid) and increase carefully.",
       },
     ],
     exercises: [
       {
-        question:
-          "Show formally why a network without nonlinear activations collapses to a single linear transformation.",
-        answer:
-          "Composing two affine maps yields another affine map: W₂(W₁x + b₁) + b₂ = (W₂W₁)x + (W₂b₁ + b₂). By induction, any number of stacked linear layers remains linear. Without nonlinearities, depth adds no expressive power over a single layer.",
+        question: "Walk through one full forward + backward pass for a 2-input, 2-hidden, 1-output XOR network with concrete weight values. What are the four \u03b4 values?",
+        answer: "With input [1,0] and target 1: forward pass produces hidden activations h\u2081, h\u2082 and output o. Step 1: \u03b4_out = (o \u2212 1) \u00b7 o(1\u2212o). Step 2: \u03b4_h1 = \u03b4_out \u00b7 w\u2081_out \u00b7 h\u2081(1\u2212h\u2081), \u03b4_h2 = \u03b4_out \u00b7 w\u2082_out \u00b7 h\u2082(1\u2212h\u2082). The exact numbers depend on initial weights, but the process is always these four steps.",
       },
       {
-        question:
-          "In your own words, explain how backpropagation uses the chain rule.",
-        answer:
-          "Backprop expresses each layer’s gradient as the product of the gradient from the layer above and the local derivative of that layer’s transformation. It propagates derivatives backwards from the loss to earlier layers using these local Jacobians.",
+        question: "Why does a network with 1 hidden neuron fail on Iris (3 classes) while 4 neurons succeed?",
+        answer: "With 1 hidden neuron, the network can only learn a single nonlinear feature from the input space, which is insufficient to carve out three distinct class regions. With 4 neurons, the hidden layer can learn four different nonlinear features, providing enough representational capacity to separate three overlapping classes.",
       },
     ],
     furtherReading: [
-      {
-        title: "Neural Networks Notebook — XOR & Iris MLP",
-        href: "/learn/ml/6/neural-networks-notebook",
-        type: "internal",
-      },
-      {
-        title: "CS231n Notes — Neural Networks Part 1",
-        href: "https://cs231n.github.io/neural-networks-1/",
-        type: "external",
-      },
+      { title: "Neural Networks Notebook \u2014 XOR & Iris MLP", href: "/learn/ml/6/neural-networks-notebook", type: "internal" },
+      { title: "3Blue1Brown \u2014 Neural Networks Series", href: "https://www.3blue1brown.com/topics/neural-networks", type: "external" },
+      { title: "Michael Nielsen \u2014 Neural Networks and Deep Learning, Chapter 2", href: "http://neuralnetworksanddeeplearning.com/chap2.html", type: "external" },
     ],
   },
 
   "neural-networks-notebook": {
     overview:
-      "This chapter walks through building a neural network from scratch in NumPy to solve XOR, then training MLPs with scikit-learn on Iris while varying width to observe underfitting and overfitting.",
+      "This notebook builds a feedforward neural network from scratch using manual backpropagation to solve the XOR problem, then scales up to MLP classifiers on the Iris dataset with varying hidden-layer widths.",
     youWillLearn: [
-      "Implementing forward and backward passes in pure NumPy",
-      "Training a small network to solve XOR",
-      "Using scikit-learn’s MLPClassifier on Iris",
-      "Exploring the effect of hidden layer width on train/test performance",
-      "Visualising decision boundaries of learned neural classifiers",
+      "Implementing a neural network without any deep learning framework",
+      "Coding the four-step backpropagation algorithm by hand",
+      "Training a network to solve XOR and watching convergence",
+      "Comparing MLP performance across different hidden neuron counts (1\u201332)",
+      "Visualising decision boundaries at different network capacities",
     ],
     mainContent: [
       {
-        heading: "From Equations to NumPy Code",
+        heading: "Building a Neural Network from Scratch",
         body:
-          "You start by translating the mathematical definition of a 2-layer network into NumPy. Each layer performs z = Wx + b, a = φ(z). During backprop you compute gradients layer-by-layer: δᶫ = (W^{ᶫ+1})ᵀ δ^{ᶫ+1} ⊙ φ′(zᶫ), ∂J/∂Wᶫ = δᶫ (a^{ᶫ−1})ᵀ and ∂J/∂bᶫ = δᶫ. Implementing these formulas directly in code demystifies how frameworks like PyTorch work internally.",
+          "The notebook starts with the NeuralNetwork class that uses a list of LogisticRegression neurons (reused from week 4). The architecture for XOR is 2 inputs + bias, 2 hidden neurons, and 1 output neuron, all with sigmoid activation. You implement the forward pass by computing activations layer by layer, then implement backpropagation with the four manual steps: output deltas, hidden deltas, output weight updates, hidden weight updates. No autograd, no PyTorch backward() \u2014 just NumPy and the chain rule.",
       },
       {
-        heading: "Solving XOR Numerically",
+        heading: "Solving XOR",
         body:
-          "You initialise a small network with random weights and train it on the four XOR points using gradient descent. Watching the loss curve descend and the predictions converge to the correct pattern illustrates how the network gradually discovers a nonlinear representation that separates the classes.",
+          "The XOR training loop iterates over the four data points repeatedly, running forward and backward for each sample. With appropriate learning rate (typically 0.5\u20132.0) and enough iterations (500\u20135000), the loss drops from ~0.7 to near zero. You plot the BCE loss curve and verify that the network outputs values close to the correct labels. The decision boundary visualisation shows how the hidden layer warps the input space to separate the diagonal XOR pattern.",
       },
       {
-        heading: "MLPs on Iris: Capacity vs Generalisation",
+        heading: "MLP Experiments on Iris",
         body:
-          "Using MLPClassifier, you train networks with hidden layer sizes such as 1, 2, 4, 8, 16, 32. For each you record training and test accuracy. Very small networks underfit; very large networks can overfit or simply plateau with no gain in performance. Plotting accuracy vs width and visualising decision boundaries gives a concrete sense of how model capacity interacts with dataset complexity.",
+          "The second part trains PyTorch MLPs with hidden layer sizes {1, 2, 4, 8, 16, 32} on the Iris dataset. For each configuration you track training and test accuracy across epochs. The results show a clear progression: 1 hidden neuron underfits (~60\u201370% accuracy), 4\u20138 neurons reach near-optimal performance (~95\u201397%), and 16\u201332 neurons achieve similar accuracy but with more variance across random seeds.",
       },
     ],
     examples: [
       {
-        title: "Manual Backprop Skeleton in NumPy",
-        description:
-          "Outline of forward and backward steps for a 2-layer network.",
-        code:
-          "# Forward\nz1 = X @ W1 + b1\na1 = np.tanh(z1)\nz2 = a1 @ W2 + b2\na2 = sigmoid(z2)\n\n# Backward for binary cross-entropy\nm = X.shape[0]\ndz2 = a2 - y\ndW2 = a1.T @ dz2 / m\ndb2 = dz2.mean(axis=0)\nda1 = dz2 @ W2.T\ndz1 = da1 * (1 - np.tanh(z1) ** 2)\ndW1 = X.T @ dz1 / m\ndb1 = dz1.mean(axis=0)",
+        title: "XOR Training Loop",
+        description: "Training a hand-coded neural network on XOR data.",
+        code: "nn = NeuralNetwork(n_inputs=2, n_hidden=2, n_outputs=1)\n\nfor iteration in range(5000):\n    total_loss = 0\n    for x, target in xor_data:\n        output = nn.forward(x)\n        loss = -target*np.log(output) - (1-target)*np.log(1-output)\n        nn.backward(target, learning_rate=1.0)\n        total_loss += loss\n    if iteration % 1000 == 0:\n        print(f\"Iter {iteration}, Loss: {total_loss:.4f}\")",
       },
     ],
     commonMistakes: [
       {
-        mistake: "Implementing backprop with incorrect tensor shapes",
-        why:
-          "Shape mismatches can silently produce wrong gradients or crash with broadcasting errors.",
-        fix:
-          "Carefully track matrix dimensions for each layer and verify intermediate shapes with asserts or print statements.",
-      },
-      {
-        mistake: "Judging model quality only by training accuracy on Iris",
-        why:
-          "Iris is small; a network can easily overfit. Training accuracy near 100% does not guarantee good generalisation.",
-        fix:
-          "Always compare training and test accuracy and, when possible, visualise decision boundaries.",
+        mistake: "Using too small a learning rate for XOR with sigmoid",
+        why: "The sigmoid gradient is at most 0.25, so gradients are already small. A tiny learning rate makes convergence painfully slow.",
+        fix: "Start with learning rate 0.5\u20132.0 for small sigmoid networks.",
       },
     ],
     exercises: [
       {
-        question:
-          "Add L2 regularisation to the NumPy implementation and observe its effect on weight magnitudes and decision boundaries.",
-        answer:
-          "Modify the loss to J_reg = J + λ(‖W1‖² + ‖W2‖²), add corresponding gradient terms 2λW1 and 2λW2, then train for multiple λ values; higher λ shrinks weights and produces smoother boundaries.",
-      },
-      {
-        question:
-          "For MLPClassifier, vary both hidden layer size and regularisation strength (alpha). What patterns do you see?",
-        answer:
-          "Larger hidden layers increase capacity, improving training accuracy but potentially harming test accuracy unless regularisation (larger alpha) is increased. There is often a sweet spot where moderate width and regularisation yield the best validation performance.",
+        question: "Run the XOR network 10 times with different random seeds. How often does it converge?",
+        answer: "With sigmoid and a reasonable learning rate, XOR typically converges in 8\u20139 out of 10 runs. Failures occur when initial weights land in a region where gradients are very small (near saturation), causing the loss to plateau at ~0.69 (random guessing).",
       },
     ],
     furtherReading: [
-      {
-        title: "Neural Networks from First Principles",
-        href: "/learn/ml/6/neural-networks-theory",
-        type: "internal",
-      },
-      {
-        title: "scikit-learn: MLPClassifier",
-        href: "https://scikit-learn.org/stable/modules/neural_networks_supervised.html",
-        type: "external",
-      },
+      { title: "Neural Networks from First Principles", href: "/learn/ml/6/neural-networks-theory", type: "internal" },
+      { title: "PyTorch: Building Models with nn.Module", href: "https://pytorch.org/tutorials/beginner/introyt/modelsyt_tutorial.html", type: "external" },
     ],
   },
 };
-

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getTopicBySlug, getMLSection, TopicResource } from "@/lib/topics";
+import { siteConfig } from "@/lib/constants";
 
 const allWeeks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -22,9 +23,9 @@ export async function generateMetadata({
     openGraph: {
       title: `${section.title} — Machine Learning`,
       description: section.summary.slice(0, 160),
-      url: `https://gulzhasml.com/learn/ml/${week}`,
+      url: `${siteConfig.url}/learn/ml/${week}`,
     },
-    alternates: { canonical: `https://gulzhasml.com/learn/ml/${week}` },
+    alternates: { canonical: `${siteConfig.url}/learn/ml/${week}` },
   };
 }
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projects } from "@/lib/constants";
+import { projects, siteConfig } from "@/lib/constants";
 
 export const metadata = {
   title: "AI & Machine Learning Projects",
@@ -9,9 +9,9 @@ export const metadata = {
     title: "AI & Machine Learning Projects — Gulzhas Mailybayeva",
     description:
       "AI/ML projects featuring LLM pipelines, RAG systems, and intelligent automation.",
-    url: "https://gulzhasml.com/projects",
+    url: `${siteConfig.url}/projects`,
   },
-  alternates: { canonical: "https://gulzhasml.com/projects" },
+  alternates: { canonical: `${siteConfig.url}/projects` },
 };
 
 export default function ProjectsPage() {

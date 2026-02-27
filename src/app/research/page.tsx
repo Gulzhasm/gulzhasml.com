@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { research } from "@/lib/constants";
+import { research, siteConfig } from "@/lib/constants";
 
 export const metadata = {
   title: "MSc Research — AI-Driven Test Case Generation with LLMs",
@@ -15,10 +15,10 @@ export const metadata = {
     title: "Research — AI-Driven Test Case Generation",
     description:
       "MSc thesis: hybrid rule-based + LLM test case generation. 92% time reduction, 94.4% coverage.",
-    url: "https://gulzhasml.com/research",
+    url: `${siteConfig.url}/research`,
     type: "article",
   },
-  alternates: { canonical: "https://gulzhasml.com/research" },
+  alternates: { canonical: `${siteConfig.url}/research` },
 };
 
 export default function ResearchPage() {

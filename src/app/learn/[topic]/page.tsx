@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { topics, getTopicBySlug, TopicResource } from "@/lib/topics";
+import { siteConfig } from "@/lib/constants";
 
 export function generateStaticParams() {
   // Exclude "ml" — it has its own dedicated route at /learn/ml
@@ -24,9 +25,9 @@ export async function generateMetadata({
     openGraph: {
       title: `${topic.title} — Learn AI & Machine Learning`,
       description: topic.description,
-      url: `https://gulzhasml.com/learn/${slug}`,
+      url: `${siteConfig.url}/learn/${slug}`,
     },
-    alternates: { canonical: `https://gulzhasml.com/learn/${slug}` },
+    alternates: { canonical: `${siteConfig.url}/learn/${slug}` },
   };
 }
 

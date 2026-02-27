@@ -1,7 +1,8 @@
 export const siteConfig = {
   name: "Gulzhas Mailybayeva",
   title: "AI/ML Engineer | LLMs, RAG, NLP",
-  tagline: "AI/ML Engineer building LLM + RAG systems for reliable software quality (ex-Senior SDET).",
+  tagline:
+    "AI/ML engineer specialising in LLM + RAG systems for reliable software quality — building multi-agent test generation (ai-test-gen) and an adversarial trading testbed (ai-gap-trading-forecaster).",
   description:
     "AI/ML Engineer specializing in LLM orchestration, RAG pipelines, and NLP. 7+ years of production engineering experience.",
   url: "https://gulzhasml.com",
@@ -23,7 +24,7 @@ export const projects = [
     title: "ai-test-gen",
     subtitle: "AI-Powered Test Case Generation Framework",
     description:
-      "A hybrid rule-based + LLM pipeline that generates structured manual test cases from Azure DevOps user stories. Combines deterministic scaffolding with Gemini 2.5 Flash for natural-language enrichment, ChromaDB for semantic step matching, and automated upload to ADO Test Plans.",
+      "A multi-agent, hybrid rule-based + LLM orchestration system that generates structured manual test cases from Azure DevOps user stories. Deterministic scaffolding handles structure, while Gemini-powered LLM correction and ChromaDB RAG enforce high-quality, consistent steps with automated upload to ADO Test Plans.",
     metrics: [
       { label: "Time Saved", value: "92%" },
       { label: "Cost/TC", value: "$0.002" },
@@ -43,13 +44,13 @@ export const projects = [
     featured: true,
   },
   {
-    title: "gap-trader",
-    subtitle: "AI-Powered Stock Trading Assistant",
+    title: "ai-gap-trading-forecaster",
+    subtitle: "RL Forecasting Engine & Adversarial UI Testbed",
     description:
-      "A gap trading assistant that scans for market gaps, manages watchlists, logs trades, and tracks performance. Built with Flask, SQLAlchemy, and real-time market data from yfinance and Finnhub.",
+      "A time-series trading application powered by RL-style decision logic and forecasting that doubles as an adversarial UI testbed. The frontend is intentionally volatile (mutating DOM, shifting locators) to create a realistic, hostile environment for validating the self-healing Playwright locators and LLM+RAG test generation pipeline in ai-test-gen.",
     metrics: [
-      { label: "Stack", value: "Flask + ML" },
-      { label: "Data", value: "Real-time" },
+      { label: "Role", value: "Adversarial UI" },
+      { label: "Domain", value: "Trading" },
     ],
     tech: [
       "Python",

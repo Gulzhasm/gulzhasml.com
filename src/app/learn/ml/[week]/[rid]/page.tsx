@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getTopicBySlug, getMLSection, getMLResource, TopicResource } from "@/lib/topics";
+import { siteConfig } from "@/lib/constants";
 import { getMLStructuredContent } from "@/content/learn/ml";
 import { StructuredContentRenderer } from "@/components/StructuredContentRenderer";
 
@@ -30,9 +31,9 @@ export async function generateMetadata({
     openGraph: {
       title: `${resource.title} — Machine Learning`,
       description: resource.description,
-      url: `https://gulzhasml.com/learn/ml/${week}/${rid}`,
+      url: `${siteConfig.url}/learn/ml/${week}/${rid}`,
     },
-    alternates: { canonical: `https://gulzhasml.com/learn/ml/${week}/${rid}` },
+    alternates: { canonical: `${siteConfig.url}/learn/ml/${week}/${rid}` },
   };
 }
 

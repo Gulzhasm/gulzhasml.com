@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteConfig } from "@/lib/constants";
 
 export const metadata = {
   title: "ai-test-gen — AI-Powered Test Case Generation with LLM",
@@ -17,9 +18,9 @@ export const metadata = {
     title: "ai-test-gen — AI-Powered Test Case Generation",
     description:
       "Hybrid rule-based + LLM pipeline: 92% time reduction, $0.002 per test case. Python, Gemini, ChromaDB, spaCy.",
-    url: "https://gulzhasml.com/projects/ai-test-gen",
+    url: `${siteConfig.url}/projects/ai-test-gen`,
   },
-  alternates: { canonical: "https://gulzhasml.com/projects/ai-test-gen" },
+  alternates: { canonical: `${siteConfig.url}/projects/ai-test-gen` },
 };
 
 export default function AiTestGenPage() {

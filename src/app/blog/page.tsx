@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { posts } from "@/lib/posts";
+import { siteConfig } from "@/lib/constants";
 
 export const metadata = {
   title: "Blog — AI, Machine Learning, NLP & Engineering",
@@ -9,9 +10,9 @@ export const metadata = {
     title: "Blog — AI, Machine Learning & Engineering",
     description:
       "Articles on machine learning, AI engineering, NLP, LLM orchestration, and Python development.",
-    url: "https://gulzhasml.com/blog",
+    url: `${siteConfig.url}/blog`,
   },
-  alternates: { canonical: "https://gulzhasml.com/blog" },
+  alternates: { canonical: `${siteConfig.url}/blog` },
 };
 
 export default function BlogPage() {

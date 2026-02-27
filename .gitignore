@@ -12,6 +12,7 @@
 /.next/
 /out/
 /subjects/
+/notes/
 
 # production
 /build
