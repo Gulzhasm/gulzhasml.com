@@ -61,51 +61,118 @@ export default function AiTestGenPage() {
         <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">Overview</h2>
         <div className="p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm space-y-4 text-[var(--color-text-muted)] leading-relaxed">
           <p>
-            A hybrid rule-based + LLM pipeline that generates structured manual test cases
-            from Azure DevOps user stories. Combines deterministic scaffolding with
-            Gemini 2.5 Flash for natural-language enrichment, ChromaDB for semantic step
-            matching, and automated upload to ADO Test Plans.
+            ai-test-gen is a multi-agent LLM orchestration system for test generation. It reads
+            structured requirements (Azure DevOps / Jira), passes them through a hybrid rule-engine
+            + LLM pipeline, enforces acceptance-criteria coverage with automated feedback loops,
+            and exports deterministic, structured test suites ready for import into ADO Test Plans.
           </p>
           <p>
-            The system first extracts acceptance criteria and UI elements from user stories
-            using spaCy NLP, then applies rule-based templates for deterministic structure.
-            The LLM enriches test steps with natural language and handles edge cases. ChromaDB
-            provides semantic similarity matching to maintain consistent wording across
-            related test cases.
+            Instead of a single prompt, the system decomposes work into specialised stages:
+            ingestion and NLP parsing, deterministic rule-based generation, RAG-powered semantic
+            matching with ChromaDB, LLM correction with JSON-schema enforcement, coverage
+            validation, and finally multi-format export (CSV, JSON, Playwright scripts).
           </p>
         </div>
       </div>
 
       {/* Architecture */}
       <div className="mb-10">
-        <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">Architecture</h2>
+        <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">System Architecture</h2>
         <div className="p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm">
           <div className="space-y-3 text-sm text-[var(--color-text-muted)]">
             <div className="flex items-start gap-3">
               <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5 shrink-0">01</span>
-              <p><span className="text-[var(--color-text)] font-medium">Input</span> &mdash; Azure DevOps user story with acceptance criteria</p>
+              <p>
+                <span className="text-[var(--color-text)] font-medium">Ingestion &amp; Parsing</span> &mdash;
+                Adapters pull stories from Azure DevOps/Jira and normalise them into domain models.
+                spaCy-based NLP extracts acceptance criteria, UI surfaces, and feature types.
+              </p>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5 shrink-0">02</span>
-              <p><span className="text-[var(--color-text)] font-medium">NLP Extraction</span> &mdash; spaCy extracts entities, actions, UI elements</p>
+              <p>
+                <span className="text-[var(--color-text)] font-medium">Deterministic Generation</span> &mdash;
+                A rule engine with 70+ QA rules expands scenarios, generates structural scaffolds
+                (PRE-REQ, launch, close, negative paths), and guarantees minimal quality without
+                any LLM calls.
+              </p>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5 shrink-0">03</span>
-              <p><span className="text-[var(--color-text)] font-medium">Rule-Based Scaffold</span> &mdash; Deterministic templates generate test structure</p>
+              <p>
+                <span className="text-[var(--color-text)] font-medium">RAG: Semantic Matching</span> &mdash;
+                ChromaDB stores previous steps as embeddings. For new stories, semantically similar
+                steps are retrieved as few-shot context to enforce consistent language and patterns.
+              </p>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5 shrink-0">04</span>
-              <p><span className="text-[var(--color-text)] font-medium">Semantic Matching</span> &mdash; ChromaDB finds similar existing steps for consistency</p>
+              <p>
+                <span className="text-[var(--color-text)] font-medium">LLM Correction</span> &mdash;
+                A provider-agnostic LLM layer (OpenAI / Gemini / Anthropic / Ollama) refines wording,
+                fills edge cases, and produces JSON-structured output that matches a strict schema.
+              </p>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5 shrink-0">05</span>
-              <p><span className="text-[var(--color-text)] font-medium">LLM Enrichment</span> &mdash; Gemini 2.5 Flash refines language and adds edge cases</p>
+              <p>
+                <span className="text-[var(--color-text)] font-medium">Validation &amp; Feedback</span> &mdash;
+                Coverage validators check that every acceptance criterion is represented. Gaps trigger
+                targeted LLM calls to generate missing tests; quality gates enforce structure,
+                forbidden-language rules, and accessibility requirements.
+              </p>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5 shrink-0">06</span>
-              <p><span className="text-[var(--color-text)] font-medium">Output</span> &mdash; Structured CSV + automated upload to ADO Test Plans</p>
+              <p>
+                <span className="text-[var(--color-text)] font-medium">Export &amp; Integration</span> &mdash;
+                Final suites are exported to ADO-compatible CSVs, JSON, and Playwright scripts, with
+                workflows to upload directly into Azure DevOps Test Plans and other tooling.
+              </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Why this architecture */}
+      <div className="mb-10">
+        <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">Why This Architecture?</h2>
+        <div className="p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm space-y-3 text-sm text-[var(--color-text-muted)]">
+          <p>
+            A single LLM prompt can hallucinate steps, miss edge cases, and drift in wording between runs.
+            ai-test-gen instead pushes as much as possible into deterministic rules, then uses LLMs only
+            where they add real value &mdash; language quality, gap filling, and semantic alignment.
+          </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>
+              <span className="text-[var(--color-text)] font-medium">Hybrid rules + LLM</span> keeps 70% of logic deterministic,
+              reducing hallucination and giving predictable structure across projects.
+            </li>
+            <li>
+              <span className="text-[var(--color-text)] font-medium">RAG with ChromaDB</span> reuses high-quality reference steps so
+              new stories read like they were written by the same senior QA engineer.
+            </li>
+            <li>
+              <span className="text-[var(--color-text)] font-medium">Coverage validation loops</span> ensure every acceptance criterion
+              is covered at least once, turning ACs into an explicit quality contract.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Quick start */}
+      <div className="mb-10">
+        <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">Quick Start (Local)</h2>
+        <div className="p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm text-sm text-[var(--color-text-muted)] space-y-3">
+          <ol className="list-decimal pl-5 space-y-1">
+            <li>Clone the repo: <code className="px-1 py-0.5 rounded bg-[var(--color-surface)] text-xs">git clone https://github.com/Gulzhasm/ai_test_gen.git</code></li>
+            <li>Create a Python 3.10 venv and install deps: <code className="px-1 py-0.5 rounded bg-[var(--color-surface)] text-xs">pip install -r requirements.txt</code></li>
+            <li>Configure <code className="px-1 py-0.5 rounded bg-[var(--color-surface)] text-xs">.env</code> with ADO + LLM keys.</li>
+            <li>Run your first generation: <code className="px-1 py-0.5 rounded bg-[var(--color-surface)] text-xs">python workflows.py generate --story-id 123456</code></li>
+          </ol>
+          <p className="text-xs">
+            Full Docker flow, CLI reference, and MCP integration are documented in the project README on GitHub.
+          </p>
         </div>
       </div>
 

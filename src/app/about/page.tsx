@@ -88,7 +88,7 @@ export default function AboutPage() {
         <div className="space-y-5">
           {[
             {
-              role: "AI Engineer / Senior SDET",
+              role: "AI Automation Engineer (Quality Systems)",
               company: "KandaSoft",
               period: "2022 -- Present",
               highlight: "Built a hybrid AI test-generation pipeline (rule-based + LLM) with RAG (ChromaDB) and Azure DevOps integration. Led automation across 5 squads; designed evaluation metrics, prompt contracts, and structured outputs for deterministic test-case generation",

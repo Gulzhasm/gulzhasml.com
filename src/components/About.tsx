@@ -79,7 +79,7 @@ export function About() {
           <div className="space-y-6">
             {[
               {
-                role: "AI Engineer / Senior SDET",
+                role: "AI Automation Engineer (Quality Systems)",
                 company: "KandaSoft",
                 period: "2022 -- Present",
                 highlight:
