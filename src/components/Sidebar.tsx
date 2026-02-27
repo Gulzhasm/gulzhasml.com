@@ -11,10 +11,162 @@ const mlWeek1Items = [
   { label: "PyTorch II — Training Pipelines", href: "/learn/ml/1/pytorch-pipelines" },
 ];
 
+const mlWeek2Items = [
+  {
+    label: "Probability Theory — Language of Uncertainty",
+    href: "/learn/ml/2/probability-foundations",
+  },
+  {
+    label: "Probability in Practice — Bayes & Gaussians",
+    href: "/learn/ml/2/probability-exercises",
+  },
+];
+
+const mlWeek3Items = [
+  {
+    label: "Linear Regression — Theory",
+    href: "/learn/ml/3/linear-regression-theory",
+  },
+  {
+    label: "Linear Regression in PyTorch",
+    href: "/learn/ml/3/regression-implementation",
+  },
+];
+
+const mlWeek4Items = [
+  {
+    label: "Logistic Regression — Theory",
+    href: "/learn/ml/4/classification-theory",
+  },
+  {
+    label: "Logistic Regression in PyTorch",
+    href: "/learn/ml/4/classification-implementation",
+  },
+];
+
+const mlWeek5Items = [
+  {
+    label: "Trees, Naive Bayes & Imbalance",
+    href: "/learn/ml/5/trees-bayes-theory",
+  },
+  {
+    label: "Classifiers in Action",
+    href: "/learn/ml/5/advanced-classification",
+  },
+];
+
+const mlWeek6Items = [
+  {
+    label: "Neural Networks from First Principles",
+    href: "/learn/ml/6/neural-networks-theory",
+  },
+  {
+    label: "Neural Networks Notebook",
+    href: "/learn/ml/6/neural-networks-notebook",
+  },
+];
+
+const mlWeek7Items = [
+  {
+    label: "Clustering — Theory",
+    href: "/learn/ml/7/clustering-theory",
+  },
+  {
+    label: "Clustering Notebook",
+    href: "/learn/ml/7/clustering-notebook",
+  },
+];
+
+const mlWeek8Items = [
+  {
+    label: "Density Estimation & EM",
+    href: "/learn/ml/8/density-estimation-theory",
+  },
+  {
+    label: "Density Estimation Notebook",
+    href: "/learn/ml/8/density-estimation-notebook",
+  },
+];
+
+const mlWeek9Items = [
+  {
+    label: "PCA & Dimensionality Reduction",
+    href: "/learn/ml/9/pca-theory",
+  },
+  {
+    label: "PCA & Feature Selection Notebook",
+    href: "/learn/ml/9/dimensionality-reduction-notebook",
+  },
+];
+
+const mlWeek10Items = [
+  {
+    label: "Deep Learning — CNNs & Transfer",
+    href: "/learn/ml/10/deep-learning-theory",
+  },
+  {
+    label: "Deep Learning Notebook",
+    href: "/learn/ml/10/deep-learning-notebook",
+  },
+];
+
 const learnTopics = [
-  { label: "Machine Learning", href: "/learn/ml", children: [
-    { label: "Week 1: Intro + Setup", href: "/learn/ml/1", children: mlWeek1Items },
-  ]},
+  {
+    label: "Machine Learning",
+    href: "/learn/ml",
+    children: [
+      {
+        label: "Week 1: Intro + Setup",
+        href: "/learn/ml/1",
+        children: mlWeek1Items,
+      },
+      {
+        label: "Week 2: Probability & Statistics",
+        href: "/learn/ml/2",
+        children: mlWeek2Items,
+      },
+      {
+        label: "Week 3: Linear Regression",
+        href: "/learn/ml/3",
+        children: mlWeek3Items,
+      },
+      {
+        label: "Week 4: Classification I",
+        href: "/learn/ml/4",
+        children: mlWeek4Items,
+      },
+      {
+        label: "Week 5: Classification II",
+        href: "/learn/ml/5",
+        children: mlWeek5Items,
+      },
+      {
+        label: "Week 6: Neural Networks",
+        href: "/learn/ml/6",
+        children: mlWeek6Items,
+      },
+      {
+        label: "Week 7: Clustering",
+        href: "/learn/ml/7",
+        children: mlWeek7Items,
+      },
+      {
+        label: "Week 8: Density Estimation",
+        href: "/learn/ml/8",
+        children: mlWeek8Items,
+      },
+      {
+        label: "Week 9: Dimensionality Reduction",
+        href: "/learn/ml/9",
+        children: mlWeek9Items,
+      },
+      {
+        label: "Week 10: Deep Learning",
+        href: "/learn/ml/10",
+        children: mlWeek10Items,
+      },
+    ],
+  },
   { label: "Artificial Intelligence", href: "/learn/ai" },
   { label: "Natural Language Processing", href: "/learn/nlp" },
   { label: "Statistical Planning and Reinforcement Learning", href: "/learn/sprl" },
