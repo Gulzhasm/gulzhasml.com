@@ -74,8 +74,9 @@ export default function Home() {
             AI-Driven Test Case Generation: A Hybrid Approach
           </h3>
           <p className="text-sm text-[var(--color-text-muted)]">
-            92% time reduction, $0.002 per test case, 94.4% acceptance criteria
-            coverage. Combining rule-based scaffolding with LLM correction.
+            Evaluated on 55 user stories / 207 test cases: 92% time reduction, 94.4% acceptance
+            criteria coverage, 72.9% first-pass structural quality at ~$0.002 per test case.
+            Combining rule-based scaffolding with LLM correction.
           </p>
           <div className="flex gap-4 mt-4">
             {[

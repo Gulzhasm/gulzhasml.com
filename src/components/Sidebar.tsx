@@ -110,6 +110,22 @@ const mlWeek10Items = [
   },
 ];
 
+const convWeek1Items = [
+  { label: "Foundations of Dialogue Systems", href: "/learn/conversational/1/foundations" },
+];
+const convWeek2Items = [
+  { label: "Dialogue Act Tagging (Lab)", href: "/learn/conversational/2/dialogue-act-tagging" },
+];
+const convWeek3Items = [
+  { label: "Seq2Seq Dialogue Model (Lab)", href: "/learn/conversational/3/seq2seq-dialogue" },
+];
+const convWeek4Items = [
+  { label: "RAG for Dialogue (Lab)", href: "/learn/conversational/4/rag-dialogue" },
+];
+const convWeek5Items = [
+  { label: "Restaurant Booking Agent (Lab)", href: "/learn/conversational/5/restaurant-agent" },
+];
+
 const learnTopics = [
   {
     label: "Machine Learning",
@@ -171,8 +187,19 @@ const learnTopics = [
   { label: "Natural Language Processing", href: "/learn/nlp" },
   { label: "Statistical Planning and Reinforcement Learning", href: "/learn/sprl" },
   { label: "Neural Networks & NLP", href: "/learn/nn-nlp" },
-  { label: "Conversational Agents", href: "/learn/conversational" },
+  {
+    label: "Conversational Agents",
+    href: "/learn/conversational",
+    children: [
+      { label: "Week 1: Foundations", href: "/learn/conversational/1", children: convWeek1Items },
+      { label: "Week 2: Dialogue Act Tagging", href: "/learn/conversational/2", children: convWeek2Items },
+      { label: "Week 3: Seq2Seq for Dialogue", href: "/learn/conversational/3", children: convWeek3Items },
+      { label: "Week 4: RAG for Dialogue", href: "/learn/conversational/4", children: convWeek4Items },
+      { label: "Week 5: Restaurant Agent", href: "/learn/conversational/5", children: convWeek5Items },
+    ],
+  },
   { label: "Information Retrieval", href: "/learn/ir" },
+  { label: "AWS ML Specialty Prep", href: "/learn/aws-ml" },
 ];
 
 const toolsTopics = [

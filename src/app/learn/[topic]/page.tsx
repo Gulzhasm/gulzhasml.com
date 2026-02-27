@@ -4,9 +4,9 @@ import { topics, getTopicBySlug, TopicResource } from "@/lib/topics";
 import { siteConfig } from "@/lib/constants";
 
 export function generateStaticParams() {
-  // Exclude "ml" — it has its own dedicated route at /learn/ml
+  // Exclude "ml" and "conversational" — they have dedicated routes
   return topics
-    .filter((t) => t.slug !== "ml")
+    .filter((t) => t.slug !== "ml" && t.slug !== "conversational")
     .map((topic) => ({ topic: topic.slug }));
 }
 
@@ -82,8 +82,9 @@ export default async function TopicPage({
 }) {
   const { topic: slug } = await params;
 
-  // ML has its own dedicated route at /learn/ml
+  // ML and Conversational have dedicated routes
   if (slug === "ml") redirect("/learn/ml");
+  if (slug === "conversational") redirect("/learn/conversational");
 
   const topic = getTopicBySlug(slug);
   if (!topic) notFound();

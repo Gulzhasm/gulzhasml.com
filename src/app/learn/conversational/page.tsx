@@ -1,0 +1,171 @@
+import Link from "next/link";
+import { getTopicBySlug, TopicResource } from "@/lib/topics";
+import { siteConfig } from "@/lib/constants";
+import { notFound } from "next/navigation";
+
+export const metadata = {
+  title: "Conversational Agents — Learn AI & Dialogue Systems",
+  description:
+    "Dialogue systems, dialogue act tagging, seq2seq models, RAG for dialogue, and task-oriented agents. Five weeks of theory and labs.",
+  keywords: [
+    "dialogue systems",
+    "chatbots",
+    "dialogue act tagging",
+    "seq2seq",
+    "RAG",
+    "task-oriented agents",
+  ],
+  openGraph: {
+    title: "Conversational Agents — Learn AI & Dialogue Systems",
+    description:
+      "Five weeks: foundations, DA tagging, seq2seq dialogue, RAG for dialogue, and restaurant booking agent.",
+    url: `${siteConfig.url}/learn/conversational`,
+  },
+  alternates: { canonical: `${siteConfig.url}/learn/conversational` },
+};
+
+function ResourceBadge({ type }: { type: TopicResource["type"] }) {
+  const labels: Record<string, string> = {
+    theory: "THEORY",
+    practice: "PRACTICE",
+    notebook: "NOTEBOOK",
+    project: "PROJECT",
+    tutorial: "TUTORIAL",
+    post: "POST",
+  };
+
+  const colors: Record<string, string> = {
+    theory: "bg-blue-50 text-blue-700 border-blue-200",
+    practice: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    notebook: "bg-purple-50 text-purple-700 border-purple-200",
+    project: "bg-amber-50 text-amber-700 border-amber-200",
+    tutorial: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    post: "bg-rose-50 text-rose-700 border-rose-200",
+  };
+
+  return (
+    <span
+      className={`text-[10px] font-bold px-2 py-0.5 rounded border ${colors[type] || "bg-gray-50 text-gray-600 border-gray-200"}`}
+    >
+      {labels[type] || type.toUpperCase()}
+    </span>
+  );
+}
+
+export default function ConversationalPage() {
+  const topic = getTopicBySlug("conversational");
+  if (!topic || !topic.sections) notFound();
+
+  return (
+    <div className="max-w-4xl mx-auto px-6 py-12">
+      <nav className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] mb-8">
+        <Link href="/" className="hover:text-[var(--color-accent)]">
+          Home
+        </Link>
+        <span>/</span>
+        <span className="text-[var(--color-text)]">{topic.title}</span>
+      </nav>
+
+      <div className="mb-10">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center">
+            <svg
+              className="w-6 h-6 text-[var(--color-accent)]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={topic.icon}
+              />
+            </svg>
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-[var(--color-text)]">
+              {topic.title}
+            </h1>
+          </div>
+        </div>
+        <p className="text-lg text-[var(--color-text-muted)] leading-relaxed">
+          {topic.description}
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-10">
+        {topic.tags.map((tag) => (
+          <span
+            key={tag}
+            className="text-xs px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-muted)]"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div className="mb-10">
+        <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">
+          Summary
+        </h2>
+        <div className="p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm">
+          <p className="text-[var(--color-text-muted)] leading-relaxed">
+            {topic.overview}
+          </p>
+        </div>
+      </div>
+
+      <div className="mb-10">
+        <h2 className="text-xl font-semibold text-[var(--color-text)] mb-6">
+          Topics & Practice
+        </h2>
+        <div className="space-y-4">
+          {topic.sections.map((section) => (
+            <Link
+              key={section.week}
+              href={`/learn/conversational/${section.week}`}
+              className="block rounded-xl border border-[var(--color-border)] bg-white shadow-sm overflow-hidden hover:shadow-md hover:border-[var(--color-accent)] transition-all group"
+            >
+              <div className="px-6 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] group-hover:bg-[var(--color-accent-light)] transition-colors">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-bold text-white bg-[var(--color-accent)] px-2.5 py-1 rounded-md">
+                      {section.week}
+                    </span>
+                    <h3 className="font-semibold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+                      {section.title}
+                    </h3>
+                  </div>
+                  <svg
+                    className="w-5 h-5 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div className="px-6 py-4">
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 line-clamp-2">
+                  {section.summary}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {section.resources.map((resource, i) => (
+                    <ResourceBadge key={i} type={resource.type} />
+                  ))}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

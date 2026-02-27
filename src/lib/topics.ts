@@ -391,16 +391,99 @@ export const topics: Topic[] = [
     title: "Conversational Agents and Dialogue Systems",
     shortTitle: "Conversational Agents",
     description:
-      "Dialogue systems, chatbot architectures, dialogue act tagging, slot filling, and seq2seq models for conversation.",
+      "Dialogue systems, chatbot architectures, dialogue act tagging, slot filling, seq2seq models, RAG for dialogue, and task-oriented agents.",
     overview:
-      "Building systems that can hold meaningful conversations. Covers rule-based and neural dialogue systems, dialogue act classification, intent detection, slot filling, and end-to-end neural approaches.",
+      "Building systems that hold meaningful conversations. From foundations and dialogue act tagging through seq2seq response generation, retrieval-augmented generation (RAG) for factual dialogue, and task-oriented agents (e.g. restaurant booking with Ollama + Llama).",
     category: "topic",
     icon: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4",
-    resources: [
-      { title: "Dialogue Act Tagging", slug: "dialogue-act-tagging", content: "", description: "Classifying utterance types in conversation", type: "practice" },
-      { title: "Seq2Seq for Dialogue", slug: "seq2seq-dialogue", content: "", description: "Encoder-decoder models for response generation", type: "theory" },
+    resources: [],
+    sections: [
+      {
+        week: 1,
+        title: "Week 1: Foundations of Dialogue Systems",
+        summary:
+          "Introduction to dialogue systems: types (chitchat vs task-oriented, retrieval vs generative), dialogue acts, pipelines (NLU, dialogue state, NLG), and evaluation. Sets the stage for the labs that follow.",
+        resources: [
+          {
+            title: "Foundations of Dialogue Systems",
+            slug: "foundations",
+            description: "Types of dialogue systems, dialogue acts, and the standard pipeline from utterance to response.",
+            content:
+              "Dialogue systems let users interact in natural language to get information, complete tasks, or have open-ended conversation. They fall into broad categories: chitchat (social, open-domain) versus task-oriented (booking, support, form-filling); retrieval-based (pick a predefined response) versus generative (produce new text, e.g. with seq2seq or LLMs).\n\nDialogue act (DA) tagging classifies each utterance by its function — question, statement, acknowledgment, request — and is a core step in many pipelines. A typical pipeline has NLU (understand intent and slots), dialogue state tracking (what the user has asked for so far), policy (what to do next), and NLG (surface a response).\n\nIn the following weeks you will implement dialogue act tagging on the Switchboard corpus, build a seq2seq generative model for open dialogue, add retrieval-augmented generation (RAG) to ground responses in external knowledge, and finally build a task-oriented restaurant-booking agent with local LLMs (Ollama + Llama) and simple function calling.",
+            type: "theory",
+          },
+        ],
+      },
+      {
+        week: 2,
+        title: "Week 2: Dialogue Act Tagging",
+        summary:
+          "Supervised dialogue act classification using the Switchboard Dialog Act Corpus. Train and compare DA tagging models as a foundation for intent-aware dialogue systems.",
+        resources: [
+          {
+            title: "Dialogue Act Tagging (Lab)",
+            slug: "dialogue-act-tagging",
+            description: "DA tagging with the Switchboard corpus; training and evaluating classification models.",
+            content:
+              "Dialogue act (DA) tagging is the task of labelling each utterance with its communicative function (e.g. statement, question, backchannel, agreement). It is usually solved with supervised learning on manually labelled data such as the Switchboard Dialog Act Corpus.\n\nIn this lab you work with the Switchboard data: loading and preprocessing the corpus, then training two different DA classification models. You will use PyTorch (or similar) for the models, and standard metrics (accuracy, per-class precision/recall) to compare them. The skills here — handling dialogue corpora, dealing with class imbalance, and interpreting confusion matrices — transfer directly to intent classification and slot tagging in task-oriented systems.\n\nThe lab notebook is available in the course materials (Lab2). Run the data download and preprocessing steps, then complete the model training and evaluation sections.",
+            type: "notebook",
+            notebookUrl: "/notebooks/conversational/lab2-dialogue-act-tagging.ipynb",
+          },
+        ],
+      },
+      {
+        week: 3,
+        title: "Week 3: Seq2Seq for Dialogue",
+        summary:
+          "End-to-end generative dialogue with sequence-to-sequence models. Build a seq2seq model for open-domain conversation and compare with retrieval-based baselines.",
+        resources: [
+          {
+            title: "Seq2Seq Dialogue Model (Lab)",
+            slug: "seq2seq-dialogue",
+            description: "Building a generative seq2seq model for general conversation and testing on factual QA.",
+            content:
+              "Retrieval-based dialogue systems choose from a fixed set of responses; generative models produce new replies. Sequence-to-sequence (seq2seq) models — encoder-decoder networks that map a source sequence (the user turn) to a target sequence (the system reply) — are a classic approach to generative dialogue.\n\nIn this lab you build an end-to-end seq2seq dialogue system: you will use the provided conversation data, implement or use an encoder-decoder architecture (e.g. LSTM or transformer), train it to generate responses, and test it on general chat and on a more factual question-answering domain. You will see how generative models can produce more varied, context-sensitive replies than retrieval, at the cost of possible incoherence or hallucination — which motivates the RAG lab in Week 4.\n\nThe lab notebook (Lab3) walks through data loading, model definition, training loop, and inference. Complete the exercises to compare different architectures or decoding strategies.",
+            type: "notebook",
+            notebookUrl: "/notebooks/conversational/lab3-seq2seq-dialogue.ipynb",
+          },
+        ],
+      },
+      {
+        week: 4,
+        title: "Week 4: RAG for Dialogue",
+        summary:
+          "Retrieval-augmented generation for information-seeking dialogue. Use Contriever to retrieve evidence and condition LLM responses on it to reduce hallucinations.",
+        resources: [
+          {
+            title: "RAG for Dialogue (Lab)",
+            slug: "rag-dialogue",
+            description: "Building a RAG pipeline for dialogue with Contriever and HybriDialogue; comparing with and without retrieval.",
+            content:
+              "Large language models can produce fluent but factually wrong or unsupported answers — a failure mode known as hallucination. Retrieval-augmented generation (RAG) mitigates this by retrieving relevant evidence from an external knowledge source and conditioning the model's response on that evidence.\n\nIn this lab you build a RAG pipeline for information-seeking dialogue. You use the HybriDialogue dataset (open-domain, information-seeking) and Contriever as the dense retriever to fetch candidate passages. You then inject the retrieved text into the prompt and generate responses with and without retrieval, comparing factual accuracy and relevance. By the end you will have a minimal RAG-for-dialogue pipeline and an appreciation of how retrieval improves grounding.\n\nThe lab (Lab4) requires a GPU and sufficient disk space for the Wikipedia dump. Follow the notebook to set up dependencies, build the retriever index, and run the dialogue evaluation.",
+            type: "notebook",
+            notebookUrl: "/notebooks/conversational/lab4-rag-dialogue.ipynb",
+          },
+        ],
+      },
+      {
+        week: 5,
+        title: "Week 5: Task-Oriented Agent (Restaurant Booking)",
+        summary:
+          "Build a prompt-based restaurant booking agent with Ollama and Llama 3.1. Use prompts and simple APIs to guide the model to call the right functions and complete bookings.",
+        resources: [
+          {
+            title: "Restaurant Booking Agent (Lab)",
+            slug: "restaurant-agent",
+            description: "Task-oriented agent with Ollama + Llama 3.1; prompt design and function calling for restaurant recommendations and booking.",
+            content:
+              "Task-oriented dialogue agents help users achieve a goal — here, recommending and booking restaurants from a dataset based on user constraints (cuisine, area, price). This lab uses a local, open-source model (Llama 3.1 8B via Ollama) to avoid paid APIs and keep the setup reproducible.\n\nYou implement a small set of APIs (e.g. search restaurants, check availability, confirm booking) and design prompts so that the model calls the appropriate API at the right time. Because prompt-based control has limits, the lab introduces simple mechanisms to refine the model's function-calling behaviour and avoid infinite loops or off-track replies. You run the agent locally (Ollama typically on localhost:11434), so use a local Jupyter or VSCode notebook rather than Colab.\n\nThe lab notebook (Lab5) covers Ollama setup, prompt design, and the restaurant dataset. Work through the steps to get a working booking agent and reflect on where prompt engineering succeeds and where stronger control (e.g. explicit state machines or learned policy) might be needed.",
+            type: "notebook",
+            notebookUrl: "/notebooks/conversational/lab5-restaurant-agent.ipynb",
+          },
+        ],
+      },
     ],
-    tags: ["Dialogue Systems", "Chatbots", "Seq2Seq", "Slot Filling", "Intent Detection"],
+    tags: ["Dialogue Systems", "Chatbots", "Seq2Seq", "RAG", "Task-Oriented", "Intent Detection"],
   },
   {
     slug: "ir",
@@ -418,6 +501,20 @@ export const topics: Topic[] = [
       { title: "Search Engine Project", slug: "search-engine", content: "", description: "Building a search engine from scratch", type: "project" },
     ],
     tags: ["TF-IDF", "BM25", "Vector Space", "Language Models", "Search Engines", "RAG"],
+  },
+
+  {
+    slug: "aws-ml",
+    title: "AWS ML Specialty Prep",
+    shortTitle: "AWS ML",
+    description:
+      "Preparing for the AWS Certified Machine Learning – Specialty exam with end-to-end AWS architectures and ML best practices.",
+    overview:
+      "A focused track for the AWS Certified Machine Learning – Specialty exam. Covers the four domains (data engineering, EDA, modelling, and ML operations) with an emphasis on how core AWS services fit together into robust, cost-effective ML solutions.",
+    category: "topic",
+    icon: "M3 7l9-4 9 4-9 4-9-4zm0 5l9 4 9-4m-9 4v6",
+    resources: [],
+    tags: ["AWS", "SageMaker", "Data Engineering", "MLOps", "Certification", "Architecture"],
   },
 
   // --- Tools & Frameworks ---
@@ -503,5 +600,15 @@ export function getMLSection(week: number): TopicSection | undefined {
 
 export function getMLResource(week: number, resourceSlug: string): TopicResource | undefined {
   const section = getMLSection(week);
+  return section?.resources.find((r) => r.slug === resourceSlug);
+}
+
+export function getConversationalSection(week: number): TopicSection | undefined {
+  const conversational = topics.find((t) => t.slug === "conversational");
+  return conversational?.sections?.find((s) => s.week === week);
+}
+
+export function getConversationalResource(week: number, resourceSlug: string): TopicResource | undefined {
+  const section = getConversationalSection(week);
   return section?.resources.find((r) => r.slug === resourceSlug);
 }

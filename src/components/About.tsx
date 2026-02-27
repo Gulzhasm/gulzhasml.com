@@ -20,8 +20,9 @@ export function About() {
               Queen Mary University of London
             </span>
             . My thesis research produced a hybrid rule-based + LLM pipeline that generates
-            structured test cases from user stories, delivering 92% time reduction at ~$0.002
-            per test case.
+            structured test cases from user stories, delivering a 92% reduction in authoring time,
+            94.4% acceptance criteria coverage, and a 72.9% first-pass structural quality rate at
+            ~$0.002 per test case (207 test cases for $0.48 of LLM cost).
           </p>
 
           <p>
