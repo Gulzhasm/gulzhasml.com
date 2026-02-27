@@ -4,8 +4,17 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const mlWeek1Items = [
+  { label: "What Is ML, Really?", href: "/learn/ml/1/intro-to-ml" },
+  { label: "Python Fundamentals for ML", href: "/learn/ml/1/python-fundamentals" },
+  { label: "PyTorch I — Tensors & Broadcasting", href: "/learn/ml/1/pytorch-tensors" },
+  { label: "PyTorch II — Training Pipelines", href: "/learn/ml/1/pytorch-pipelines" },
+];
+
 const learnTopics = [
-  { label: "Machine Learning", href: "/learn/ml" },
+  { label: "Machine Learning", href: "/learn/ml", children: [
+    { label: "Week 1: Intro + Setup", href: "/learn/ml/1", children: mlWeek1Items },
+  ]},
   { label: "Artificial Intelligence", href: "/learn/ai" },
   { label: "Natural Language Processing", href: "/learn/nlp" },
   { label: "Statistical Planning and Reinforcement Learning", href: "/learn/sprl" },
@@ -45,6 +54,78 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
+type LearnItem = {
+  label: string;
+  href: string;
+  children?: LearnItem[];
+};
+
+function LearnItemLink({
+  item,
+  pathname,
+}: {
+  item: LearnItem;
+  pathname: string;
+}) {
+  const hasChildren = item.children && item.children.length > 0;
+  const isActive = pathname === item.href;
+  const isChildActive = hasChildren && item.children!.some(
+    (c) => pathname === c.href || (c.children && c.children.some((cc) => pathname === cc.href))
+  );
+  const [open, setOpen] = useState(isActive || !!isChildActive);
+
+  if (!hasChildren) {
+    return (
+      <Link
+        href={item.href}
+        className={`block px-4 py-1.5 text-sm rounded-r-lg border-l-2 transition-colors ${
+          isActive
+            ? "border-[var(--color-accent)] bg-[var(--color-accent-light)] text-[var(--color-accent)] font-medium"
+            : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]"
+        }`}
+      >
+        {item.label}
+      </Link>
+    );
+  }
+
+  return (
+    <div key={item.href}>
+      <div
+        className={`flex items-center gap-1 rounded-r-lg border-l-2 transition-colors ${
+          isActive
+            ? "border-[var(--color-accent)] bg-[var(--color-accent-light)]"
+            : "border-transparent"
+        }`}
+      >
+        <Link
+          href={item.href}
+          className={`flex-1 px-4 py-1.5 text-sm ${
+            isActive ? "text-[var(--color-accent)] font-medium" : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)]"
+          } hover:bg-[var(--color-surface-hover)] transition-colors`}
+        >
+          {item.label}
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="px-2 py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+          aria-label={open ? "Collapse" : "Expand"}
+        >
+          <ChevronIcon open={open} />
+        </button>
+      </div>
+      {open && (
+        <div className="ml-2">
+          {item.children!.map((child) => (
+            <LearnItemLink key={child.href} item={child} pathname={pathname} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SidebarSection({
   title,
   items,
@@ -52,7 +133,7 @@ function SidebarSection({
   defaultOpen = true,
 }: {
   title: string;
-  items: { label: string; href: string }[];
+  items: LearnItem[];
   pathname: string;
   defaultOpen?: boolean;
 }) {
@@ -69,22 +150,9 @@ function SidebarSection({
       </button>
       {open && (
         <div className="ml-2">
-          {items.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`block px-4 py-1.5 text-sm rounded-r-lg border-l-2 transition-colors ${
-                  isActive
-                    ? "border-[var(--color-accent)] bg-[var(--color-accent-light)] text-[var(--color-accent)] font-medium"
-                    : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          {items.map((item) => (
+            <LearnItemLink key={item.href} item={item} pathname={pathname} />
+          ))}
         </div>
       )}
     </div>

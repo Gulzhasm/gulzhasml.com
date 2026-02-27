@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getTopicBySlug, getMLSection, getMLResource, TopicResource } from "@/lib/topics";
+import { getWeek1StructuredContent } from "@/content/learn/ml/week1";
+import { StructuredContentRenderer } from "@/components/StructuredContentRenderer";
 
 export function generateStaticParams() {
   const ml = getTopicBySlug("ml");
@@ -97,6 +99,9 @@ export default async function ResourcePage({
   const nextResource =
     currentIndex < resources.length - 1 ? resources[currentIndex + 1] : null;
 
+  const structuredContent =
+    weekNum === 1 ? getWeek1StructuredContent(rid) : null;
+
   const paragraphs = resource.content
     .split("\n\n")
     .filter((p) => p.trim().length > 0);
@@ -162,17 +167,45 @@ export default async function ResourcePage({
 
       {/* Content */}
       <div className="mb-10">
-        <article className="p-8 rounded-xl bg-white border border-[var(--color-border)] shadow-sm space-y-5">
-          {paragraphs.map((paragraph, i) => (
-            <p
-              key={i}
-              className="text-[var(--color-text-secondary)] leading-[1.8] text-[15px]"
-            >
-              {renderInlineCode(paragraph)}
-            </p>
-          ))}
-        </article>
+        <div className="p-8 rounded-xl bg-white border border-[var(--color-border)] shadow-sm">
+          {structuredContent ? (
+            <StructuredContentRenderer content={structuredContent} />
+          ) : (
+            <article className="space-y-5">
+              {paragraphs.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="text-[var(--color-text-secondary)] leading-[1.8] text-[15px]"
+                >
+                  {renderInlineCode(paragraph)}
+                </p>
+              ))}
+            </article>
+          )}
+        </div>
       </div>
+
+      {/* Related Topics (for structured content pages) */}
+      {structuredContent && resources.length > 1 && (
+        <div className="mb-10 p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">
+            Related Topics
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {resources
+              .filter((r) => r.slug !== rid)
+              .map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/learn/ml/${weekNum}/${r.slug}`}
+                  className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] text-sm text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+                >
+                  {r.title}
+                </Link>
+              ))}
+          </div>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="flex items-center justify-between pt-6 border-t border-[var(--color-border)]">

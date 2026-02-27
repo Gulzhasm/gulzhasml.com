@@ -44,7 +44,7 @@ export const topics: Topic[] = [
     sections: [
       {
         week: 1,
-        title: "Introduction to Machine Learning & Python Foundations",
+        title: "Week 1: Intro + Setup",
         summary:
           "An introduction to the ML landscape: what machine learning is, the difference between supervised and unsupervised learning, and the types of problems ML can solve (regression, classification, clustering). The practical component covers Python fundamentals (variables, data types, control flow, functions) and PyTorch basics — tensor operations, matrix multiplication, broadcasting, reshaping, nn.Module, autograd, and building simple MLP pipelines for binary classification, multi-class classification, multi-label classification, and regression tasks.",
         resources: [

@@ -82,7 +82,7 @@ export default async function MLWeekPage({
           Machine Learning
         </Link>
         <span>/</span>
-        <span className="text-[var(--color-text)]">Topic {weekNum}</span>
+        <span className="text-[var(--color-text)]">{section.title}</span>
       </nav>
 
       {/* Header */}
