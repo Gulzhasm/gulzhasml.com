@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getTopicBySlug, getMLSection, getMLResource, TopicResource } from "@/lib/topics";
-import { getWeek1StructuredContent } from "@/content/learn/ml/week1";
+import { getMLStructuredContent } from "@/content/learn/ml";
 import { StructuredContentRenderer } from "@/components/StructuredContentRenderer";
 
 export function generateStaticParams() {
@@ -99,8 +99,7 @@ export default async function ResourcePage({
   const nextResource =
     currentIndex < resources.length - 1 ? resources[currentIndex + 1] : null;
 
-  const structuredContent =
-    weekNum === 1 ? getWeek1StructuredContent(rid) : null;
+  const structuredContent = getMLStructuredContent(weekNum, rid);
 
   const paragraphs = resource.content
     .split("\n\n")

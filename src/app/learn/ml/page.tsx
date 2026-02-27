@@ -120,55 +120,6 @@ export default function MLPage() {
         </div>
       </div>
 
-      {/* Materials — Week 1 (Getting Started) */}
-      {topic.sections[0] && (
-        <div className="mb-10">
-          <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">
-            Materials
-          </h2>
-          <p className="text-sm text-[var(--color-text-muted)] mb-4">
-            Start with Week 1: Intro + Setup — four materials to build your ML foundation.
-          </p>
-          <div className="space-y-3">
-            {topic.sections[0].resources.map((resource) => (
-              <Link
-                key={resource.slug}
-                href={`/learn/ml/1/${resource.slug}`}
-                className="block p-5 rounded-xl bg-white border border-[var(--color-border)] shadow-sm hover:shadow-md hover:border-[var(--color-accent)] transition-all group"
-              >
-                <div className="flex items-start gap-3">
-                  <ResourceBadge type={resource.type} />
-                  <div className="flex-1">
-                    <h3 className="font-medium text-[var(--color-text)] mb-1 group-hover:text-[var(--color-accent)] transition-colors">
-                      {resource.title}
-                    </h3>
-                    <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-                      {resource.description}
-                    </p>
-                    {resource.notebookUrl && (
-                      <span className="inline-flex items-center gap-1 mt-2 text-xs text-[var(--color-accent)]">
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Includes notebook
-                      </span>
-                    )}
-                  </div>
-                  <svg
-                    className="w-5 h-5 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors shrink-0 mt-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Topics & Practice — All Weeks */}
       <div className="mb-10">
         <h2 className="text-xl font-semibold text-[var(--color-text)] mb-6">
