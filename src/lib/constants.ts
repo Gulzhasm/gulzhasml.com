@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Gulzhas Mailybayeva",
   title: "AI/ML Engineer | LLMs, RAG, NLP",
   tagline:
-    "AI/ML engineer specialising in LLM + RAG systems for reliable software quality — building multi-agent test generation (ai-test-gen) and an adversarial trading testbed (ai-gap-trading-forecaster).",
+    "I work on LLMs, retrieval, and testing. I built an AI test case generator (ai-test-gen) and a small trading app (ai-gap-trading-forecaster) that I use as a tough UI testbed.",
   description:
     "AI/ML Engineer specializing in LLM orchestration, RAG pipelines, and NLP. 7+ years of production engineering experience.",
   url: "https://gulzhasml.com",

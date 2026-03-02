@@ -13,6 +13,9 @@ export interface TopicSection {
   title: string;
   summary: string;
   resources: TopicResource[];
+  /** Optional lecture PDF for this section (e.g. course slides). Served from public/materials/ or external URL. */
+  lecturePdfUrl?: string;
+  lectureTitle?: string;
 }
 
 export interface Topic {
@@ -403,6 +406,8 @@ export const topics: Topic[] = [
         title: "Week 1: Foundations of Dialogue Systems",
         summary:
           "Introduction to dialogue systems: types (chitchat vs task-oriented, retrieval vs generative), dialogue acts, pipelines (NLU, dialogue state, NLG), and evaluation. Sets the stage for the labs that follow.",
+        lecturePdfUrl: "/materials/conversational/week1-foundations.pdf",
+        lectureTitle: "Lecture 1: Foundations of Dialogue Systems",
         resources: [
           {
             title: "Foundations of Dialogue Systems",
@@ -419,6 +424,8 @@ export const topics: Topic[] = [
         title: "Week 2: Dialogue Act Tagging",
         summary:
           "Supervised dialogue act classification using the Switchboard Dialog Act Corpus. Train and compare DA tagging models as a foundation for intent-aware dialogue systems.",
+        lecturePdfUrl: "/materials/conversational/week2-dialogue-act-tagging.pdf",
+        lectureTitle: "Lecture 2: Dialogue Act Tagging",
         resources: [
           {
             title: "Dialogue Act Tagging (Lab)",
@@ -436,6 +443,8 @@ export const topics: Topic[] = [
         title: "Week 3: Seq2Seq for Dialogue",
         summary:
           "End-to-end generative dialogue with sequence-to-sequence models. Build a seq2seq model for open-domain conversation and compare with retrieval-based baselines.",
+        lecturePdfUrl: "/materials/conversational/week3-seq2seq-dialogue.pdf",
+        lectureTitle: "Lecture 3: Seq2Seq for Dialogue",
         resources: [
           {
             title: "Seq2Seq Dialogue Model (Lab)",
@@ -453,6 +462,8 @@ export const topics: Topic[] = [
         title: "Week 4: RAG for Dialogue",
         summary:
           "Retrieval-augmented generation for information-seeking dialogue. Use Contriever to retrieve evidence and condition LLM responses on it to reduce hallucinations.",
+        lecturePdfUrl: "/materials/conversational/week4-rag-dialogue.pdf",
+        lectureTitle: "Lecture 4: RAG for Dialogue",
         resources: [
           {
             title: "RAG for Dialogue (Lab)",
@@ -470,6 +481,8 @@ export const topics: Topic[] = [
         title: "Week 5: Task-Oriented Agent (Restaurant Booking)",
         summary:
           "Build a prompt-based restaurant booking agent with Ollama and Llama 3.1. Use prompts and simple APIs to guide the model to call the right functions and complete bookings.",
+        lecturePdfUrl: "/materials/conversational/week5-task-oriented-agent.pdf",
+        lectureTitle: "Lecture 5: Task-Oriented Agent",
         resources: [
           {
             title: "Restaurant Booking Agent (Lab)",

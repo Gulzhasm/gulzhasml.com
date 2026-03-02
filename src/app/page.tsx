@@ -5,9 +5,9 @@ import { topics } from "@/lib/topics";
 import { posts } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: "Gulzhas Mailybayeva | AI/ML Engineer — Machine Learning, NLP, LLM Orchestration",
+  title: "Gulzhas Mailybayeva | AI/ML Engineer | Machine Learning, NLP, LLM Orchestration",
   description:
-    "AI/ML Engineer portfolio featuring machine learning projects, NLP research, LLM orchestration, RAG pipelines, and intelligent test automation. MSc AI at Queen Mary University of London.",
+    "ML and NLP projects, research, and learning notes. MSc AI at Queen Mary University of London.",
   openGraph: {
     title: "Gulzhas Mailybayeva | AI/ML Engineer",
     description:
@@ -26,7 +26,7 @@ export default function Home() {
       {/* Welcome */}
       <div className="mb-12">
         <h1 className="text-3xl font-bold text-[var(--color-text)] mb-2">
-          Gulzhas Mailybayeva — AI/ML Engineer
+          Gulzhas Mailybayeva, AI/ML Engineer
         </h1>
         <p className="text-sm text-[var(--color-text-muted)] mb-3">
           Machine Learning · NLP · LLM Orchestration · RAG
@@ -41,8 +41,8 @@ export default function Home() {
         {[
           { label: "AI Systems Shipped", value: "2" },
           { label: "Research Projects", value: "1" },
-          { label: "Generated Test Cases", value: "207" },
           { label: "Learning Topics", value: String(topics.filter((t) => t.category === "topic").length) },
+          { label: "Courses", value: "ML · Conversational · AWS" },
         ].map((stat) => (
           <div
             key={stat.label}
@@ -65,7 +65,7 @@ export default function Home() {
         </h2>
         <Link
           href="/research"
-          className="block p-6 rounded-xl bg-white border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
+          className="block p-5 rounded-xl bg-white border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
         >
           <p className="text-xs text-[var(--color-accent)] font-medium mb-1">
             MSc Thesis
@@ -74,26 +74,8 @@ export default function Home() {
             AI-Driven Test Case Generation: A Hybrid Approach
           </h3>
           <p className="text-sm text-[var(--color-text-muted)]">
-            Evaluated on 55 user stories / 207 test cases: 92% time reduction, 94.4% acceptance
-            criteria coverage, 72.9% first-pass structural quality at ~$0.002 per test case.
-            Combining rule-based scaffolding with LLM correction.
+            I combined rule-based scaffolding with LLM correction and evaluated it on real user stories. Full numbers and method are on the research page.
           </p>
-          <div className="flex gap-4 mt-4">
-            {[
-              { label: "Time Saved", value: "92%" },
-              { label: "Cost/TC", value: "$0.002" },
-              { label: "Quality", value: "73% first-pass" },
-            ].map((m) => (
-              <div key={m.label} className="text-center">
-                <p className="text-lg font-bold text-[var(--color-accent)]">
-                  {m.value}
-                </p>
-                <p className="text-xs text-[var(--color-text-muted)]">
-                  {m.label}
-                </p>
-              </div>
-            ))}
-          </div>
         </Link>
       </div>
 

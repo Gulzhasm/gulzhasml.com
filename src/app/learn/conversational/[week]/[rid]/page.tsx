@@ -133,6 +133,19 @@ export default async function ConversationalResourcePage({
           {resource.description}
         </p>
 
+        {section.lecturePdfUrl && (
+          <a
+            href={section.lecturePdfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-4 mr-3 px-4 py-2 rounded-lg bg-white border-2 border-[var(--color-accent)] text-[var(--color-accent)] text-sm font-medium hover:bg-[var(--color-accent-light)] transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+            {section.lectureTitle ?? "Lecture (PDF)"}
+          </a>
+        )}
         {resource.notebookUrl && (
           <a
             href={resource.notebookUrl}

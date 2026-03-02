@@ -2,11 +2,11 @@ import Link from "next/link";
 import { siteConfig, skillCategories } from "@/lib/constants";
 
 export const metadata = {
-  title: "About Gulzhas Mailybayeva — AI/ML Engineer, NLP & LLM Orchestration",
+  title: "About Gulzhas Mailybayeva | AI/ML Engineer, NLP & LLM Orchestration",
   description:
     "AI/ML Engineer specializing in LLM orchestration, RAG pipelines, and NLP. 7+ years of production engineering experience.",
   openGraph: {
-    title: "About Gulzhas Mailybayeva — AI/ML Engineer",
+    title: "About Gulzhas Mailybayeva | AI/ML Engineer",
     description:
       "AI/ML Engineer specializing in LLM orchestration, RAG pipelines, and NLP.",
     url: "https://gulzhasml.com/about",
@@ -33,9 +33,9 @@ export default function AboutPage() {
       {/* Bio */}
       <div className="mb-10 space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          AI/ML Engineer focused on{" "}
+          I focus on{" "}
           <span className="text-[var(--color-text)] font-medium">LLM orchestration, RAG pipelines, and NLP</span>
-          {" "}— with a systems mindset: evaluation, reproducibility, and production-readiness.
+          {" "}and care about evaluation, reproducibility, and making things work in production.
         </p>
         <p>
           I&apos;m currently completing an MSc in Computer Science (AI) at{" "}
@@ -62,7 +62,7 @@ export default function AboutPage() {
             Medium
           </a>
           ), I publish daily learning notes, Jupyter notebooks, and deep dives on ML, NLP,
-          and deep learning — designed as fast refreshers for interviews and practical
+          and deep learning, designed as fast refreshers for interviews and practical
           references for building real systems.
         </p>
         <p className="text-[var(--color-text)] font-medium">
@@ -163,7 +163,7 @@ export default function AboutPage() {
         <h2 className="text-xl font-semibold text-[var(--color-text)] mb-4">Let&apos;s Connect</h2>
         <p className="text-[var(--color-text-muted)] mb-6">
           If you&apos;re working on applied AI, reliability, evaluation, or AI-powered engineering
-          workflows, I&apos;d love to chat — collaboration, consulting, or just exchanging ideas.
+          workflows, I&apos;d love to chat: collaboration, consulting, or just exchanging ideas.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <a
