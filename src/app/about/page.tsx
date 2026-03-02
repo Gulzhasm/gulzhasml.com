@@ -33,20 +33,26 @@ export default function AboutPage() {
       {/* Bio */}
       <div className="mb-10 space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          I focus on{" "}
+          I specialize in{" "}
           <span className="text-[var(--color-text)] font-medium">LLM orchestration, RAG pipelines, and NLP</span>
           {" "}and care about evaluation, reproducibility, and making things work in production.
         </p>
         <p>
-          I&apos;m currently completing an MSc in Computer Science (AI) at{" "}
-          <span className="text-[var(--color-text)] font-medium">Queen Mary University of London</span>.
-          My thesis research produced a hybrid rule-based + LLM pipeline that generates structured
-          test cases from user stories, delivering a 92% reduction in authoring time, 94.4% acceptance
-          criteria coverage, and a 72.9% first-pass structural quality rate at ~$0.002 per test case
-          (207 test cases for $0.48 of LLM cost).
+          I built and actively develop{" "}
+          <span className="text-[var(--color-text)] font-medium">ai-test-gen</span>, a hybrid
+          rule-based + LLM pipeline that generates structured test cases from user stories. Evaluated
+          on a production CAD application, it delivers a 92% reduction in authoring time, 94.4%
+          acceptance criteria coverage, and a 72.9% first-pass structural quality rate at ~$0.002
+          per test case (870 test cases for $1.74 of LLM cost). This is a real, production-grade
+          system I continue to evolve and improve.
         </p>
         <p>
-          Before focusing on AI full-time, I spent years building large-scale engineering
+          I&apos;m currently completing an MSc in Computer Science (AI) at{" "}
+          <span className="text-[var(--color-text)] font-medium">Queen Mary University of London</span>,
+          where my thesis research formalizes the methodology behind ai-test-gen.
+        </p>
+        <p>
+          Before dedicating myself to AI full-time, I spent years building large-scale engineering
           automation in enterprise environments. That experience shaped how I build AI today:
           clean interfaces, measurable outcomes, robust pipelines, and a strong bias toward
           systems that work reliably outside the demo.
@@ -74,7 +80,7 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         {[
           { label: "Experience", value: "7+ years" },
-          { label: "Focus", value: "AI/ML Engineering (LLMs · RAG · NLP · Evaluation)" },
+          { label: "Specialization", value: "AI/ML Engineering (LLMs · RAG · NLP · Evaluation)" },
           { label: "Education", value: "MSc Computer Science (AI), QMUL" },
         ].map((item) => (
           <div key={item.label} className="p-4 rounded-xl bg-white border border-[var(--color-border)] shadow-sm">

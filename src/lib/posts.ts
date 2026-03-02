@@ -14,7 +14,7 @@ export const posts: BlogPost[] = [
     title: "How I Built a Hybrid Rule-Based + LLM Test Generation Pipeline",
     date: "2026-02-15",
     excerpt:
-      "207 test cases, $0.002 each, 92% time saved. A deep dive into combining deterministic scaffolding with Gemini 2.5 Flash for automated test case generation from user stories.",
+      "870 test cases, $0.002 each, 92% time saved. A deep dive into combining deterministic scaffolding with Gemini 2.5 Flash for automated test case generation from user stories.",
     tags: ["AI", "Test Automation", "LLM", "Engineering"],
     readTime: "8 min",
   },

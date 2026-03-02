@@ -7,7 +7,7 @@ export function About() {
 
         <div className="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
           <p>
-            AI/ML Engineer focused on{" "}
+            AI/ML Engineer specializing in{" "}
             <span className="text-[var(--color-text)]">
               LLM orchestration, RAG pipelines, and NLP
             </span>
@@ -15,18 +15,24 @@ export function About() {
           </p>
 
           <p>
+            I built and actively develop{" "}
+            <span className="text-[var(--color-text)]">ai-test-gen</span>, a hybrid
+            rule-based + LLM pipeline that generates structured test cases from user stories.
+            Evaluated on a production CAD application, it delivers a 92% reduction in authoring time,
+            94.4% acceptance criteria coverage, and a 72.9% first-pass structural quality rate at
+            ~$0.002 per test case (870 test cases for $1.74 of LLM cost).
+          </p>
+
+          <p>
             I&apos;m currently completing an MSc in Computer Science (AI) at{" "}
             <span className="text-[var(--color-text)]">
               Queen Mary University of London
             </span>
-            . My thesis research produced a hybrid rule-based + LLM pipeline that generates
-            structured test cases from user stories, delivering a 92% reduction in authoring time,
-            94.4% acceptance criteria coverage, and a 72.9% first-pass structural quality rate at
-            ~$0.002 per test case (207 test cases for $0.48 of LLM cost).
+            , where my thesis research formalizes the methodology behind ai-test-gen.
           </p>
 
           <p>
-            Before focusing on AI full-time, I spent years building large-scale engineering
+            Before dedicating myself to AI full-time, I spent years building large-scale engineering
             automation in enterprise environments. That experience shaped how I build AI today:
             clean interfaces, measurable outcomes, robust pipelines, and a strong bias toward
             systems that work reliably outside the demo.
@@ -55,7 +61,7 @@ export function About() {
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
             { label: "Experience", value: "7+ years" },
-            { label: "Focus", value: "AI/ML Engineering (LLMs · RAG · NLP · Evaluation)" },
+            { label: "Specialization", value: "AI/ML Engineering (LLMs · RAG · NLP · Evaluation)" },
             { label: "Education", value: "MSc Computer Science (AI), QMUL" },
           ].map((item) => (
             <div

@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Gulzhas Mailybayeva",
   title: "AI/ML Engineer | LLMs, RAG, NLP",
   tagline:
-    "I work on LLMs, retrieval, and testing. I built an AI test case generator (ai-test-gen) and a small trading app (ai-gap-trading-forecaster) that I use as a tough UI testbed.",
+    "I build and ship LLM-powered systems. I developed ai-test-gen -- a hybrid rule-based + LLM pipeline for test case generation that I actively maintain -- and a trading app (ai-gap-trading-forecaster) I use as an adversarial UI testbed.",
   description:
     "AI/ML Engineer specializing in LLM orchestration, RAG pipelines, and NLP. 7+ years of production engineering experience.",
   url: "https://gulzhasml.com",
@@ -28,7 +28,7 @@ export const projects = [
     metrics: [
       { label: "Time Saved", value: "92%" },
       { label: "Cost/TC", value: "$0.002" },
-      { label: "Test Cases", value: "207" },
+      { label: "Test Cases", value: "870" },
       { label: "Quality", value: "73% first-pass" },
     ],
     tech: [
@@ -120,7 +120,7 @@ export const research = {
     "First-pass quality rate of 72.9% (95% CI: 58.4%--84.3%)",
     "Dominant failure mode: non-deterministic language in error-handling tests (38.9%)",
     "Hybrid approach provides structural guarantees that pure LLM methods lack",
-    "LLM cost is negligible ($0.48 for 207 test cases) -- human review is the real cost",
+    "LLM cost is negligible ($1.74 for 870 test cases) -- human review is the real cost",
   ],
   rqs: [
     "RQ1: Does hybrid generation reduce time vs manual?",

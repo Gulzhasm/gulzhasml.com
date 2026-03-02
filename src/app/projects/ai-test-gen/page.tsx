@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/constants";
 export const metadata = {
   title: "ai-test-gen — AI-Powered Test Case Generation with LLM",
   description:
-    "Hybrid rule-based + LLM pipeline generating test cases from user stories. Evaluated on 55 user stories / 207 test cases: 92% time reduction, 94.4% AC coverage, ~$0.002 per test case. Built with Python, Gemini 2.5 Flash, ChromaDB, and spaCy.",
+    "Hybrid rule-based + LLM pipeline generating test cases from user stories. Evaluated on 55 user stories / 870 test cases: 92% time reduction, 94.4% AC coverage, ~$0.002 per test case. Built with Python, Gemini 2.5 Flash, ChromaDB, and spaCy.",
   keywords: [
     "AI test generation",
     "LLM test automation",
@@ -17,7 +17,7 @@ export const metadata = {
   openGraph: {
     title: "ai-test-gen — AI-Powered Test Case Generation",
     description:
-      "Hybrid rule-based + LLM pipeline: 92% time reduction, 94.4% AC coverage, ~$0.002 per test case on 207 tests. Python, Gemini, ChromaDB, spaCy.",
+      "Hybrid rule-based + LLM pipeline: 92% time reduction, 94.4% AC coverage, ~$0.002 per test case on 870 tests. Python, Gemini, ChromaDB, spaCy.",
     url: `${siteConfig.url}/projects/ai-test-gen`,
   },
   alternates: { canonical: `${siteConfig.url}/projects/ai-test-gen` },
@@ -46,7 +46,7 @@ export default function AiTestGenPage() {
         {[
           { label: "Time Saved", value: "92%" },
           { label: "Cost/TC", value: "$0.002" },
-          { label: "Test Cases", value: "207" },
+          { label: "Test Cases", value: "870" },
           { label: "Quality", value: "73% first-pass" },
         ].map((m) => (
           <div key={m.label} className="p-4 rounded-xl bg-white border border-[var(--color-border)] shadow-sm text-center">
@@ -74,9 +74,9 @@ export default function AiTestGenPage() {
           </p>
           <p className="text-sm">
             In an MSc research study on a production CAD application (55 user stories, 870 manual
-            tests), ai-test-gen generated 207 structured test cases with a 92% reduction in authoring
+            tests), ai-test-gen generated 870 structured test cases with a 92% reduction in authoring
             time, 94.4% acceptance-criteria coverage, and a first-pass structural quality of 72.9%
-            at a total LLM cost of $0.48 (~$0.002 per test case).
+            at a total LLM cost of $1.74 (~$0.002 per test case).
           </p>
         </div>
       </div>
